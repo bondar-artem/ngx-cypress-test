@@ -25,21 +25,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/layout/stepper',
       },
       {
-        title: 'List',
-        link: '/pages/layout/list',
-      },
-      {
-        title: 'Infinite List',
-        link: '/pages/layout/infinite-list',
-      },
-      {
         title: 'Accordion',
         link: '/pages/layout/accordion',
-      },
-      {
-        title: 'Tabs',
-        pathMatch: 'prefix',
-        link: '/pages/layout/tabs',
       },
     ],
   },
@@ -56,35 +43,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/forms/layouts',
       },
       {
-        title: 'Buttons',
-        link: '/pages/forms/buttons',
-      },
-      {
         title: 'Datepicker',
         link: '/pages/forms/datepicker',
-      },
-    ],
-  },
-  {
-    title: 'UI Features',
-    icon: 'keypad-outline',
-    link: '/pages/ui-features',
-    children: [
-      {
-        title: 'Grid',
-        link: '/pages/ui-features/grid',
-      },
-      {
-        title: 'Icons',
-        link: '/pages/ui-features/icons',
-      },
-      {
-        title: 'Typography',
-        link: '/pages/ui-features/typography',
-      },
-      {
-        title: 'Animated Searches',
-        link: '/pages/ui-features/search-fields',
       },
     ],
   },
@@ -145,28 +105,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
-    title: 'Maps',
-    icon: 'map-outline',
-    children: [
-      {
-        title: 'Google Maps',
-        link: '/pages/maps/gmaps',
-      },
-      {
-        title: 'Leaflet Maps',
-        link: '/pages/maps/leaflet',
-      },
-      {
-        title: 'Bubble Maps',
-        link: '/pages/maps/bubble',
-      },
-      {
-        title: 'Search Maps',
-        link: '/pages/maps/searchmap',
-      },
-    ],
-  },
-  {
     title: 'Charts',
     icon: 'pie-chart-outline',
     children: [
@@ -209,16 +147,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Tree Grid',
         link: '/pages/tables/tree-grid',
-      },
-    ],
-  },
-  {
-    title: 'Miscellaneous',
-    icon: 'shuffle-2-outline',
-    children: [
-      {
-        title: '404',
-        link: '/pages/miscellaneous/404',
       },
     ],
   },
