@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ExtraComponentsComponent } from './extra-components.component';
 import { AlertComponent } from './alert/alert.component';
-import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ChatComponent } from './chat/chat.component';
@@ -16,10 +15,6 @@ const routes: Routes = [{
     {
       path: 'calendar',
       component: CalendarComponent,
-    },
-    {
-      path: 'progress-bar',
-      component: ProgressBarComponent,
     },
     {
       path: 'spinner',
