@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+
 
 describe('Our first suite', () => {
 
@@ -6,7 +6,4 @@ describe('Our first suite', () => {
 
     })
 
-
 })
-
-
