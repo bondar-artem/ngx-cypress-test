@@ -135,7 +135,7 @@ describe('Our first suite', () => {
 
     })
 
-    it.only('assert property', () => {
+    it('assert property', () => {
 
         function selectDayFromCurrent(day){
             let date = new Date()
