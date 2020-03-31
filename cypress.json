@@ -1,9 +1,19 @@
 {
   "baseUrl": "http://localhost:4200/",
-  "ignoreTestFiles": "**/examples/*",
+  "ignoreTestFiles": ["**/examples/*",
+                      "**/__snapshots__/*",
+                      "**/__image_snapshots__/*"
+                    ],
   "viewportHeight": 1080,
   "viewportWidth": 1920,
-  "video": true,
+  "video": false,
   "defaultCommandTimeout": 10000,
-  "projectId": "soeotu"
+  "projectId": "soeotu",
+  "env": {
+    "cypress-plugin-snapshots": {
+      "imageConfig": {
+        "threshold": 0.01
+      }
+    }
+  }
 }
