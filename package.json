@@ -28,7 +28,7 @@
     "prepush": "npm run lint:ci",
     "release:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
     "cy:run_spec": "npx cypress run --spec 'cypress/integration/testWithPageObjects.spec.js'",
-    "cy:run_browser": "npm run cy:run_spec -- --browser firefox --group Frirefox --ci-build-id 1 & npm run cy:run_spec -- --browser chrome --group Chrome --ci-build-id 1",
+    "cy:run_browser": "npm run cy:run_spec -- --browser firefox --group Frirefox --ci-build-id 1 & npm run cy:run_spec -- --browser chrome --group Chrome --ci-build-id 1"
   },
   "dependencies": {
     "@agm/core": "^1.0.0-beta.5",
