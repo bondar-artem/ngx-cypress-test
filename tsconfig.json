@@ -9,13 +9,11 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2015",
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress"],
     "typeRoots": [
       "node_modules/@types"
-    ],
-    "lib": [
-      "es2017",
-      "dom"
     ],
     "plugins": [
       { "name": "tslint-language-service"}
