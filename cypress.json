@@ -1,0 +1,6 @@
+{
+    "baseUrl": "https://qa-sandbox.apps.htec.rs",
+    "ignoreTestFiles": "**/examples/*",
+    "viewportWidth": 1920,
+    "viewportHeight": 1080
+}
