@@ -64,7 +64,7 @@ describe('our first suite', () => {
     //If we have unique only name of form
     cy.contains('nb-card', 'Horizontal form').find('[type="email"]')
   })
-  it.only('then and wrap methods', () => {
+  it('then and wrap methods', () => {
     cy.visit('/')
     cy.contains('Forms').click()
     cy.contains('Form Layouts').click()
@@ -83,7 +83,7 @@ describe('our first suite', () => {
       expect(passwordLabelFirst).to.equal('Password')
 
       //if we need to compare some value from firstForm context (password label in that case) and from another form
-      cy.contains('nb-card', 'Basic form').then(secondForm =>{
+      cy.contains('nb-card', 'Basic form').then(secondForm => {
         const passwordSecondText = secondForm.find('[for="exampleInputPassword1"]').text()
         expect(passwordLabelFirst).to.equal(passwordSecondText)
 
@@ -94,5 +94,36 @@ describe('our first suite', () => {
       })
     })
   })
+  it.only('Invoke command', () => {
+    cy.visit('/')
+    cy.contains('Forms').click()
+    cy.contains('Form Layouts').click()
 
+
+    //1 method of work with text in Cypress
+    cy.get('[for="exampleInputEmail1"]').should('contain', 'Email address')
+
+    //2
+    cy.get('[for="exampleInputEmail1"]').then(label => {
+      expect(label.text()).to.equal('Email address')
+    })
+
+    //3
+    cy.get('[for="exampleInputEmail1"]').invoke('text').then(text => {
+      expect(text).to.equal('Email address')
+    })
+    //3 method to check that checkbox is checked (attribute name changed)
+    cy.contains('nb-card', 'Basic form')
+      .find('nb-checkbox')
+      .click()
+      .find('.custom-checkbox')
+      .invoke('attr', 'class')
+      // easiest way
+      // .should("contain", 'checked')
+
+      // harder way
+      .then(classValue => {
+        expect(classValue).to.contain('checked')
+      })
+  })
 })
