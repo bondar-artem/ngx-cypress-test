@@ -34,7 +34,7 @@ describe('our first suite', () => {
     // The most recommended way by Cypress
     cy.get('[data-cy="imputEmail1"]')
   })
-  it.only('second test', () =>{
+  it('second test', () => {
     cy.visit('/')
     cy.contains('Forms').click()
     cy.contains('Form Layouts').click()
@@ -46,7 +46,7 @@ describe('our first suite', () => {
     cy.contains('Sign in')
 
     //by unique Attribute name
-    cy.contains('[status="warning"]','Sign in')
+    cy.contains('[status="warning"]', 'Sign in')
 
     /* What if it doesn't have any unique id or smth?
     1. We will search first unique element id in section with needed item
@@ -63,6 +63,16 @@ describe('our first suite', () => {
 
     //If we have unique only name of form
     cy.contains('nb-card', 'Horizontal form').find('[type="email"]')
-
   })
+  it.only('then and wrap methods', () => {
+    cy.visit('/')
+    cy.contains('Forms').click()
+    cy.contains('Form Layouts').click()
+
+    cy.contains('nb-card', 'Using the Grid').find('[for="inputEmail1"]').should('contain', 'Email')
+    cy.contains('nb-card', 'Using the Grid').find('[for="inputPassword2"]').should("contain", 'Password')
+    cy.contains('nb-card', 'Basic form').find('[for="exampleInputEmail1"]').should('contain', 'Email address')
+    cy.contains('nb-card', 'Basic form').find('[for="exampleInputPassword1"]').should("contain", 'Password')
+  })
+
 })
