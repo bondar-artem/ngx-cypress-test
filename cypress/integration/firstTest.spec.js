@@ -69,10 +69,30 @@ describe('our first suite', () => {
     cy.contains('Forms').click()
     cy.contains('Form Layouts').click()
 
-    cy.contains('nb-card', 'Using the Grid').find('[for="inputEmail1"]').should('contain', 'Email')
-    cy.contains('nb-card', 'Using the Grid').find('[for="inputPassword2"]').should("contain", 'Password')
-    cy.contains('nb-card', 'Basic form').find('[for="exampleInputEmail1"]').should('contain', 'Email address')
-    cy.contains('nb-card', 'Basic form').find('[for="exampleInputPassword1"]').should("contain", 'Password')
+    // cy.contains('nb-card', 'Using the Grid').find('[for="inputEmail1"]').should('contain', 'Email')
+    // cy.contains('nb-card', 'Using the Grid').find('[for="inputPassword2"]').should("contain", 'Password')
+    // cy.contains('nb-card', 'Basic form').find('[for="exampleInputEmail1"]').should('contain', 'Email address')
+    // cy.contains('nb-card', 'Basic form').find('[for="exampleInputPassword1"]').should("contain", 'Password')
+
+    //Cypress style
+    //Note:  after .then it's going JQuery object
+    cy.contains('nb-card', 'Using the Grid').then(firstForm => {
+      const emailLabelFirst = firstForm.find('[for="inputEmail1"]').text()
+      const passwordLabelFirst = firstForm.find('[for="inputPassword2"]').text()
+      expect(emailLabelFirst).to.equal('Email')
+      expect(passwordLabelFirst).to.equal('Password')
+
+      //if we need to compare some value from firstForm context (password label in that case) and from another form
+      cy.contains('nb-card', 'Basic form').then(secondForm =>{
+        const passwordSecondText = secondForm.find('[for="exampleInputPassword1"]').text()
+        expect(passwordLabelFirst).to.equal(passwordSecondText)
+
+        /* if we need to make some action with context from firstForm or secondForm the only way is
+        to use wrap() func as it make JQuery object back to Cypress object
+        */
+        cy.wrap(secondForm).find('[for="exampleInputPassword1"]').should('contain', 'Password')
+      })
+    })
   })
 
 })
