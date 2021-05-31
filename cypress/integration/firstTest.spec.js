@@ -137,7 +137,7 @@ describe('our first suite', () => {
       cy.wrap(input).invoke('prop', 'value').should('contain', 'May 24, 2021')
     })
   })
-  it.only('radio button', () => {
+  it('radio button', () => {
     cy.visit('/')
     cy.contains('Forms').click()
     cy.contains('Form Layouts').click()
@@ -164,10 +164,17 @@ describe('our first suite', () => {
     })
 
   })
-  it.only('radio button', () => {
+  it('checkboxes', () => {
     cy.visit('/')
-    cy.contains('Forms').click()
-    cy.contains('Form Layouts').click()
+    cy.contains('Modal & Overlays').click()
+    cy.contains('Toastr').click()
+    /*
+    .check() can only check your checkboxes, but not instead
+    better to use it when you are working with checkboxes
+     */
+    // cy.get('[type="checkbox"]').check({force:true}) // it will check all checkboxes
+    cy.get('[type="checkbox"]').eq(0).click({force:true}).should('not.be.checked')
+    cy.get('[type="checkbox"]').eq(1).check({force:true}).should('be.checked')
 
   })
 })
