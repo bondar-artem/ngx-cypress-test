@@ -1,5 +1,6 @@
 import {navigateTo} from "../support/page_objects/navigationPage";
 import {onFormLayoutPage} from "../support/page_objects/formLayoutPage";
+import {onDatePickerPage} from "../support/page_objects/datepickerPage";
 
 describe(' Test with Page Objects', () => {
 
@@ -20,5 +21,9 @@ describe(' Test with Page Objects', () => {
     navigateTo.formLayoutPage()
     onFormLayoutPage.submitInLineFormWithNameAndEmail('Vladyslav QA', 'qa@test.com')
     onFormLayoutPage.submitBasicFormWithEmailAndPassword('qa@test.com', '12345678')
+    navigateTo.datePickerPage()
+    onDatePickerPage.selectCommonDatepickerDateFromToday(1)
+    onDatePickerPage.selectDatepickerWithRangeFromToday(7, 20)
+
   })
 })
