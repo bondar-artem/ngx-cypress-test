@@ -296,7 +296,7 @@ describe('our first suite', () => {
     cy.contains('nb-card', 'Colored Tooltips').contains('Default').click()
     cy.get('nb-tooltip').should('contain', 'This is a tooltip')
   })
-  it.only('if dialog is browser prompt() (yes/no) dialog', () => {
+  it('if dialog is browser prompt() (yes/no) dialog', () => {
     // usual tooltip check example
     cy.visit('/')
     cy.contains('Tables & Data').click()
