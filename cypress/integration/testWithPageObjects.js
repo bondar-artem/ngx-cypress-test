@@ -19,5 +19,6 @@ describe(' Test with Page Objects', () => {
 
     navigateTo.formLayoutPage()
     onFormLayoutPage.submitInLineFormWithNameAndEmail('Vladyslav QA', 'qa@test.com')
+    onFormLayoutPage.submitBasicFormWithEmailAndPassword('qa@test.com', '12345678')
   })
 })
