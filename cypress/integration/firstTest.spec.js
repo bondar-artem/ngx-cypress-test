@@ -256,7 +256,7 @@ describe('our first suite', () => {
       })
     })
   });
-  it.only('datepicker', () => {
+  it('datepicker', () => {
 
     function selectDayFromCurrent(day) {
 
@@ -264,7 +264,7 @@ describe('our first suite', () => {
       date.setDate(date.getDate() + day)
       let futureDay = date.getDate()
       let futureMonth = date.toLocaleString('default', {month: 'short'})
-      let dateAssert = futureMonth+ ' ' + futureDay+ ", " + date.getFullYear()
+      let dateAssert = futureMonth + ' ' + futureDay + ", " + date.getFullYear()
 
       cy.get('nb-calendar-navigation').invoke('attr', 'ng-reflect-date').then(dateAttribute => {
         if (!dateAttribute.includes(futureMonth)) {
@@ -286,5 +286,38 @@ describe('our first suite', () => {
       let dateAssert = selectDayFromCurrent(15)
       cy.wrap(input).invoke('prop', 'value').should('contain', dateAssert)
     })
+  })
+  it('tooltips', () => {
+    // usual tooltip check example
+    cy.visit('/')
+    cy.contains('Modal & Overlays').click()
+    cy.contains('Tooltip').click()
+
+    cy.contains('nb-card', 'Colored Tooltips').contains('Default').click()
+    cy.get('nb-tooltip').should('contain', 'This is a tooltip')
+  })
+  it.only('if dialog is browser prompt() (yes/no) dialog', () => {
+    // usual tooltip check example
+    cy.visit('/')
+    cy.contains('Tables & Data').click()
+    cy.contains('Smart Table').click()
+
+    // 1 Not good way
+    cy.get('tbody tr').first().find('.nb-trash').click()
+    cy.on('window:confirm', (confirm) =>{
+      expect(confirm).to.equal('Are you sure you want to delete?')
+    })
+
+    // 2 (Preferred way) if we haven't "Are you sure..." we will receive empty stub and test will fail
+    const stub = cy.stub()
+    cy.on('window:confirm', stub)
+    cy.get('tbody tr').first().find('.nb-trash').click().then(() => {
+      expect(stub.getCall(0)).to.be.calledWith('Are you sure you want to delete?')
+    })
+
+    // 3 if we wanna check "Cancel"
+
+    cy.get('tbody tr').first().find('.nb-trash').click()
+    cy.on('window:confirm', ()=> false)
   })
 })
