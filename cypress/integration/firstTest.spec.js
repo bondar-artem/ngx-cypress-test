@@ -1,9 +1,14 @@
+import {navigateTo} from "../support/page_objects/navigationPage";
+
 describe('our first suite', () => {
+
+  beforeEach('open application', () => {
+    cy.visit('/')
+  })
+
   it('first test', () => {
 
-    cy.visit('/')
-    cy.contains('Forms').click()
-    cy.contains('Form Layouts').click()
+    navigateTo.formLayoutPage()
     //by Tag Name
     cy.get('input')
 
@@ -35,9 +40,8 @@ describe('our first suite', () => {
     cy.get('[data-cy="imputEmail1"]')
   })
   it('second test', () => {
-    cy.visit('/')
-    cy.contains('Forms').click()
-    cy.contains('Form Layouts').click()
+
+    navigateTo.formLayoutPage()
 
     // by adding own identifier to Sign In button
     cy.get('[data-cy="signInButton"]')
@@ -65,9 +69,8 @@ describe('our first suite', () => {
     cy.contains('nb-card', 'Horizontal form').find('[type="email"]')
   })
   it('then and wrap methods', () => {
-    cy.visit('/')
-    cy.contains('Forms').click()
-    cy.contains('Form Layouts').click()
+
+    navigateTo.formLayoutPage()
 
     // cy.contains('nb-card', 'Using the Grid').find('[for="inputEmail1"]').should('contain', 'Email')
     // cy.contains('nb-card', 'Using the Grid').find('[for="inputPassword2"]').should("contain", 'Password')
@@ -95,10 +98,8 @@ describe('our first suite', () => {
     })
   })
   it('Invoke command', () => {
-    cy.visit('/')
-    cy.contains('Forms').click()
-    cy.contains('Form Layouts').click()
 
+    navigateTo.formLayoutPage()
 
     //1 method of work with text in Cypress
     cy.get('[for="exampleInputEmail1"]').should('contain', 'Email address')
@@ -127,9 +128,8 @@ describe('our first suite', () => {
       })
   })
   it('assert property', () => {
-    cy.visit('/')
-    cy.contains('Forms').click()
-    cy.contains('Datepicker').click()
+
+    navigateTo.datePickerPage()
 
     cy.contains('nb-card', 'Common Datepicker').find('input').then(input => {
       cy.wrap(input).click()
@@ -138,9 +138,8 @@ describe('our first suite', () => {
     })
   })
   it('radio button', () => {
-    cy.visit('/')
-    cy.contains('Forms').click()
-    cy.contains('Form Layouts').click()
+
+    navigateTo.formLayoutPage()
 
     cy.contains('nb-card', 'Using the Grid').find('[type="radio"]').then(radioButtons => {
 
@@ -165,9 +164,9 @@ describe('our first suite', () => {
 
   })
   it('checkboxes', () => {
-    cy.visit('/')
-    cy.contains('Modal & Overlays').click()
-    cy.contains('Toastr').click()
+
+    navigateTo.toasterPage()
+
     /*
     .check() can only check your checkboxes, but not instead
     better to use it when you are working with checkboxes
@@ -178,8 +177,6 @@ describe('our first suite', () => {
 
   })
   it('lists and dropdowns', () => {
-
-    cy.visit('/')
 
     // 1 way of working with single element
     cy.get('nav nb-select').click()
@@ -212,9 +209,8 @@ describe('our first suite', () => {
     })
   })
   it('web-tables', () => {
-    cy.visit('/')
-    cy.contains('Tables & Data').click()
-    cy.contains('Smart Table').click()
+
+    navigateTo.smartTablePage()
 
     // 1
     // work with existing table rows
@@ -277,9 +273,7 @@ describe('our first suite', () => {
       return dateAssert
     }
 
-    cy.visit('/')
-    cy.contains('Forms').click()
-    cy.contains('Datepicker').click()
+    navigateTo.datePickerPage()
 
     cy.contains('nb-card', 'Common Datepicker').find('input').then(input => {
       cy.wrap(input).click()
@@ -289,18 +283,15 @@ describe('our first suite', () => {
   })
   it('tooltips', () => {
     // usual tooltip check example
-    cy.visit('/')
-    cy.contains('Modal & Overlays').click()
-    cy.contains('Tooltip').click()
+
+    navigateTo.tooltipPage()
 
     cy.contains('nb-card', 'Colored Tooltips').contains('Default').click()
     cy.get('nb-tooltip').should('contain', 'This is a tooltip')
   })
   it('if dialog is browser prompt() (yes/no) dialog', () => {
     // usual tooltip check example
-    cy.visit('/')
-    cy.contains('Tables & Data').click()
-    cy.contains('Smart Table').click()
+    navigateTo.smartTablePage()
 
     // 1 Not good way
     cy.get('tbody tr').first().find('.nb-trash').click()
