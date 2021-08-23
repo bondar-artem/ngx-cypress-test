@@ -14,6 +14,7 @@ describe('Our first suite', () => {
         //by ID
         cy.get('#inputEmail1')
 
+<<<<<<< Updated upstream
         //by Class name
         cy.get('.input-full-width')
 
@@ -25,6 +26,13 @@ describe('Our first suite', () => {
 
         //by Class value
         cy.get('[class="input-full-width size-medium shape-rectangle"]')
+=======
+    //ClassValue
+    cy.get('class="input-full-width size-medium shape-rectangle"');
+
+    //by two diferent attributes
+    cy.get('[placeholder="Email"][type="email"]');
+>>>>>>> Stashed changes
 
         //by Tag name and Attribute with value
         cy.get('input[placeholder="Email"]')
