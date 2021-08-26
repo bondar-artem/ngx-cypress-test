@@ -1,7 +1,5 @@
 ///<reference types="cypress" />
 
-const { get } = require("cypress/types/lodash");
-
 describe("Our first suite from TL", () => {
   it("first test", () => {
     cy.visit("/");
@@ -46,6 +44,13 @@ describe("Our first suite from TL", () => {
     cy.get("#inputEmail3")
       .parents("form")
       .find("button")
-      .should("contain", "Sign in");
+      .should("contain", "Sign in")
+      .parents("form")
+      .find("nb-checkbox")
+      .click();
+
+    cy.contains("nb-card", "Form without labels")
+      .find('[placeholder="Recipients"]')
+      .click();
   });
 });
