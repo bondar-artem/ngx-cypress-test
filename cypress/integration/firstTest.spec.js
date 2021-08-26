@@ -1,5 +1,7 @@
 ///<reference types="cypress" />
 
+const { get } = require("cypress/types/lodash");
+
 describe("Our first suite from TL", () => {
   it("first test", () => {
     cy.visit("/");
@@ -28,5 +30,22 @@ describe("Our first suite from TL", () => {
     cy.get('input[placeholder="Email"]#inputEmail1.input-full-width');
 
     cy.get('[data-cy="imputEmail1"]');
+  });
+
+  it("first test", () => {
+    cy.visit("/");
+    cy.contains("Forms").click();
+    cy.contains("Form Layouts").click();
+
+    cy.get('[data-cy="signInButton"]');
+
+    cy.contains("Sign in");
+
+    cy.contains('[status="warning"]', "Sign in");
+
+    cy.get("#inputEmail3")
+      .parents("form")
+      .find("button")
+      .should("contain", "Sign in");
   });
 });
