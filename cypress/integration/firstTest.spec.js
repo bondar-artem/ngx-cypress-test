@@ -1,5 +1,8 @@
 ///<reference types="cypress" />
 
+const exp = require("constants");
+const { first } = require("rxjs-compat/operator/first");
+
 describe("Our first suite from TL", () => {
   it("first test", () => {
     cy.visit("/");
@@ -52,5 +55,48 @@ describe("Our first suite from TL", () => {
     cy.contains("nb-card", "Form without labels")
       .find('[placeholder="Recipients"]')
       .click();
+  });
+
+  it.only("then and wrap methods", () => {
+    cy.visit("/");
+    cy.contains("Forms").click();
+    cy.contains("Form Layouts").click();
+
+    // Using the grid checkling
+    cy.contains("nb-card", "Using the Grid")
+      .find('[for="inputEmail1"]')
+      .should("contain", "Email");
+
+    cy.contains("nb-card", "Using the Grid")
+      .find('[for="inputPassword2"]')
+      .should("contain", "Password");
+
+    // Basic form checking
+    cy.contains("nb-card", "Basic form")
+      .find('[for="exampleInputEmail1"]')
+      .should("contain", "Email");
+
+    cy.contains("nb-card", "Basic form")
+      .find('[for="exampleInputPassword1"]')
+      .should("contain", "Password");
+
+    //This is for jQuery methods
+    cy.contains("nb-card", "Using the Grid").then((firstForm) => {
+      const emailLabelFirst = firstForm.find('[for="inputEmail1"]').text();
+      const passworLabelFirst = firstForm.find('[for="inputPassword2"]').text();
+      expect(emailLabelFirst).to.equal("Email");
+      expect(passworLabelFirst).to.equal("Password");
+
+      cy.contains("nb-card", "Basic form").then((secondForm) => {
+        const passwordSecondText = secondForm
+          .find('[for="exampleInputPassword1"]')
+          .text();
+        expect(passworLabelFirst).to.equal("passwordSecondText");
+
+        cy.wrap(secondForm)
+          .find('[for="exampleInputPassword1"]')
+          .should("contain", "Password");
+      });
+    });
   });
 });
