@@ -57,7 +57,7 @@ describe("Our first suite from TL", () => {
       .click();
   });
 
-  it.only("then and wrap methods", () => {
+  it("then and wrap methods", () => {
     cy.visit("/");
     cy.contains("Forms").click();
     cy.contains("Form Layouts").click();
@@ -98,5 +98,26 @@ describe("Our first suite from TL", () => {
           .should("contain", "Password");
       });
     });
+  });
+
+  //it.only("invoke command", () => {
+  //cy.visit("/");
+  //cy.contains("Forms").click();
+  // cy.contains("Form Layouts").click();
+
+  it.only(" assert property", () => {
+    cy.visit("/");
+    cy.contains("Forms").click();
+    cy.contains("Datepicker").click();
+
+    cy.contains("nb-card", "Common Datepicker")
+      .find("input")
+      .then((input) => {
+        cy.wrap(input).click();
+        cy.get("nb-calendar-day-picker").contains("28").click();
+        cy.wrap(input)
+          .invoke("prop", "value")
+          .should("contain", "Aug 28, 2021");
+      });
   });
 });
