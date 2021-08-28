@@ -91,7 +91,7 @@ describe("Our first suite from TL", () => {
         const passwordSecondText = secondForm
           .find('[for="exampleInputPassword1"]')
           .text();
-        expect(passworLabelFirst).to.equal("passwordSecondText");
+        expect(passworLabelFirst).to.equal(passwordSecondText);
 
         cy.wrap(secondForm)
           .find('[for="exampleInputPassword1"]')
