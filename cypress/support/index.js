@@ -18,3 +18,5 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+export { default as Button } from './common_elements/button'
