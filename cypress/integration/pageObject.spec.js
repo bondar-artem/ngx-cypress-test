@@ -11,7 +11,12 @@ describe('pageObject test', () => {
         // onMainPage.clickOnMainSidebarSection('Forms')
         // onMainPage.clickOnMainSidebarSection('Auth')
         // onMainPage.clickOnSidebarSubsection('Layout', 'Stepper')
-        onMainPage.selectBackgroundColor('Dark')
+        // onMainPage.selectBackgroundColor('Dark')
+        // onMainPage.clickOnEmailIcon()
+        // onMainPage.clickOnBellIcon()
+        // onMainPage.clickOnUserProfilIcon()
+        // onMainPage.clickOnSearchIcon()
+        onMainPage.clickOnSidebarIcon()
     })
 
     
