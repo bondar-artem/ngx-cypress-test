@@ -1,0 +1,6 @@
+{
+    "baseUrl": "http://localhost:4200/",
+    "ignoreTestFiles": ["**/2-advanced-examples/*", "**/1-getting-started/*"],
+    "viewportHeight": 1080,
+    "viewportWidth": 1920
+}
