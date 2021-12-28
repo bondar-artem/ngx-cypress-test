@@ -89,6 +89,7 @@
     "@types/node": "6.0.90",
     "codelyzer": "^5.0.1",
     "conventional-changelog-cli": "^2.1.1",
+    "cypress": "^9.2.0",
     "husky": "0.13.3",
     "jasmine-core": "2.6.4",
     "jasmine-spec-reporter": "4.1.1",
@@ -106,5 +107,9 @@
     "tslint": "^6.1.3",
     "tslint-language-service": "^0.9.9",
     "typescript": "3.4.5"
-  }
+  },
+  "description": "This is modified and more lightweight version of original application to practice UI Automation with Cypress.",
+  "homepage": "https://github.com/akveo/ngx-admin#readme",
+  "main": "karma.conf.js",
+  "author": ""
 }
