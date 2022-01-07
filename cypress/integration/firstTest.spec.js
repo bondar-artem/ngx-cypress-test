@@ -5,20 +5,19 @@ describe("Our first suite", () => {
     cy.visit("/");
 
     //by tag name
-    cy.get("input");
+    cy.get("input")
 
     //by iD
-    cy.get("inputEmail1");
+    cy.get("inputEmail1")
 
     //by class
-    cy.get(".input-full-width");
+    cy.get(".input-full-width")
 
     //by attribute
     cy.get("[placeholder]");
 
     //by atribute and value
-    cy.get('[placeholder="Email"]');
-
+    cy.get('[placeholder="Email"]')
     //by class value
     cy.get('[class="input-full-width size-medium shape-rectangle"]');
 
