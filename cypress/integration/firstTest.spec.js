@@ -1,56 +1,29 @@
-///<reference types="cypress" />
+/// <reference types = "cypress" />
 
-describe("Our first suite from TL", () => {
+describe("Our first suite", () => {
   it("first test", () => {
     cy.visit("/");
-    cy.contains("Forms").click();
-    cy.contains("Form Layouts").click();
 
-    //by TagName
+    //by tag name
     cy.get("input");
 
-    //by ID
-    cy.get("#inputEmail1");
+    //by iD
+    cy.get("inputEmail1");
 
-    //ClassName
+    //by class
     cy.get(".input-full-width");
 
+    //by attribute
     cy.get("[placeholder]");
 
-    cy.get("[placeholder=Email]");
+    //by atribute and value
+    cy.get('[placeholder="Email"]');
 
-    cy.get('[class ="input-full-width size-medium shape-rectangle"]');
+    //by class value
+    cy.get('[class="input-full-width size-medium shape-rectangle"]');
 
-    cy.get('input[placeholder = "Email"]');
+    //by tag name and atribute wiht value
 
-    cy.get('[placeholder="Email"][type="email"]');
-
-    cy.get('input[placeholder="Email"]#inputEmail1.input-full-width');
-
-    cy.get('[data-cy="imputEmail1"]');
-  });
-
-  it("first test", () => {
-    cy.visit("/");
-    cy.contains("Forms").click();
-    cy.contains("Form Layouts").click();
-
-    cy.get('[data-cy="signInButton"]');
-
-    cy.contains("Sign in");
-
-    cy.contains('[status="warning"]', "Sign in");
-
-    cy.get("#inputEmail3")
-      .parents("form")
-      .find("button")
-      .should("contain", "Sign in")
-      .parents("form")
-      .find("nb-checkbox")
-      .click();
-
-    cy.contains("nb-card", "Form without labels")
-      .find('[placeholder="Recipients"]')
-      .click();
+    cy.get('input[placeholder="Email"]');
   });
 });
