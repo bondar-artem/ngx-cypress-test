@@ -1,4 +1,6 @@
 {
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "tslint.enable": false
+    "tslint.enable": false,
+    "vetur.format.defaultFormatter.js": "vscode-typescript",
+    "prettier.semi": false
 }
