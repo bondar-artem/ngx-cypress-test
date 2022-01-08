@@ -8,6 +8,21 @@ describe("Login page and login data filled", () => {
     cy.contains("Forms").click()
     cy.contains('Form Layout').click()
 
+    //add name 
+    cy.contains('nb-card', 'Inline form').find('[placeholder="Jane Doe"]')
+      .click()
+      .type('Milos Lazic')
+
+    //cy.get('.custom-checkbox') Treba srediti prvi check box na stranici...????
+    // .parents('Remember me')
+    //.click()
+
+    //email form input text
+    cy.contains('nb-card', 'Inline form').find('[data-cy="eMailForm1"]')
+      .click()
+      .type('test@mail.com')
+    cy.get('[data-cy="submitButtonMain"]')
+      .click()
 
     //Add email and password info
     cy.contains('nb-card', 'Horizontal form').find('[type="email"]')
@@ -27,7 +42,7 @@ describe("Login page and login data filled", () => {
       .parents('form')
       .find('nb-checkbox').click()
 
-    cy.get('[status="warning"]').click()
+    cy.get('[status="warning"]')
 
 
 
