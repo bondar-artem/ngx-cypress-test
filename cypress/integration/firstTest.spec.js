@@ -1,56 +1,72 @@
-///<reference types="cypress" />
+/// <reference types = "cypress" />
 
-describe("Our first suite from TL", () => {
-  it("first test", () => {
-    cy.visit("/");
-    cy.contains("Forms").click();
-    cy.contains("Form Layouts").click();
+describe("Login page and login data filled", () => {
 
-    //by TagName
-    cy.get("input");
+  it("Form login page test1", () => {
 
-    //by ID
-    cy.get("#inputEmail1");
+    cy.visit("/")
+    cy.contains("Forms").click()
+    cy.contains('Form Layout').click()
 
-    //ClassName
-    cy.get(".input-full-width");
+    //add name 
+    cy.contains('nb-card', 'Inline form').find('[placeholder="Jane Doe"]')
+      .click()
+      .type('Milos Lazic')
 
-    cy.get("[placeholder]");
+    //cy.get('.custom-checkbox') Treba srediti prvi check box na stranici...????
+    // .parents('Remember me')
+    //.click()
 
-    cy.get("[placeholder=Email]");
+    //email form input text
+    cy.contains('nb-card', 'Inline form').find('[data-cy="eMailForm1"]')
+      .click()
+      .type('test@mail.com')
+    cy.get('[data-cy="submitButtonMain"]')
+      .click()
 
-    cy.get('[class ="input-full-width size-medium shape-rectangle"]');
+    //Add email and password info
+    cy.contains('nb-card', 'Horizontal form').find('[type="email"]')
+      .click()
+      .type('milos@gmail.com')
 
-    cy.get('input[placeholder = "Email"]');
+    //input password field
+    cy.contains('nb-card', 'Horizontal form').find('#inputPassword3')
+      .click()
+      .type('smederevo026')
 
-    cy.get('[placeholder="Email"][type="email"]');
+    //check-box and sign in button activated
+    cy.get('#inputEmail3')
+      .parents('form')
+      .find('button')
+      .should('contain', 'Sign in')
+      .parents('form')
+      .find('nb-checkbox').click()
 
-    cy.get('input[placeholder="Email"]#inputEmail1.input-full-width');
+    cy.get('[status="warning"]')
 
-    cy.get('[data-cy="imputEmail1"]');
-  });
 
-  it("first test", () => {
-    cy.visit("/");
-    cy.contains("Forms").click();
-    cy.contains("Form Layouts").click();
 
-    cy.get('[data-cy="signInButton"]');
 
-    cy.contains("Sign in");
 
-    cy.contains('[status="warning"]', "Sign in");
+    //by tag name
+    //y.get("input")
 
-    cy.get("#inputEmail3")
-      .parents("form")
-      .find("button")
-      .should("contain", "Sign in")
-      .parents("form")
-      .find("nb-checkbox")
-      .click();
+    //by class
+    //cy.get(".input-full-width")
+    //by attribute
+    //cy.get("[placeholder]")
 
-    cy.contains("nb-card", "Form without labels")
-      .find('[placeholder="Recipients"]')
-      .click();
-  });
-});
+    //by atribute and value
+    //cy.get('[placeholder="Email"]')
+    //by class value
+    //cy.get('[class="input-full-width size-medium shape-rectangle"]')
+
+    //by tag name and atribute wiht value
+
+    //cy.get('input[placeholder="Email"]')
+
+    //
+    //cy.get('[data-cy="signInButton"]')
+  })
+
+})
