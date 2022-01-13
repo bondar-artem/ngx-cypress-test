@@ -5,8 +5,14 @@
       <nb-card-body>
         <form class="form-inline">
           <input type="text" nbInput fullWidth placeholder="Jane Doe" />
-          <input type="text" nbInput fullWidth placeholder="Email" />
-          <nb-checkbox>Remember me</nb-checkbox>
+          <input
+            type="text"
+            data-cy="Email2"
+            nbInput
+            fullWidth
+            placeholder="Email"
+          />
+          <nb-checkbox data-cy="inlinecheckbox">Remember me</nb-checkbox>
           <button
             type="submit"
             data-cy="submitButtonMain"

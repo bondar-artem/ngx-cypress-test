@@ -13,16 +13,25 @@ describe("Login page and login data filled", () => {
       .click()
       .type('Milos Lazic')
 
+    cy.get('nb-card-body')
+      .should('contain.text', 'Email')
+      .get('[data-cy="Email2"]')
+      .click()
+      .type('milos@gmail.com')
+
     //checkbox testing
-    cy.get('nb-checkbox')
+    cy.get('[data-cy="inlinecheckbox"]')
       .find('label')
       .find('input[type="checkbox"]')
+      .should('not.contain.text')
       .check({ force: true })
+      .should('be.checked')
+
 
     //email form input text
 
-    cy.get('[data-cy="submitButtonMain"]')
-      .click()
+    //cy.get('[data-cy="submitButtonMain"]')
+    // .click()
 
     //Add email and password info
     cy.contains('nb-card', 'Horizontal form').find('[type="email"]')
