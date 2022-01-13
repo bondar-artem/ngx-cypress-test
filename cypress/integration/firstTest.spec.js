@@ -13,14 +13,14 @@ describe("Login page and login data filled", () => {
       .click()
       .type('Milos Lazic')
 
-    //cy.get('.custom-checkbox') Treba srediti prvi check box na stranici...????
-    // .parents('Remember me')
-    //.click()
+    //checkbox testing
+    cy.get('nb-checkbox')
+      .find('label')
+      .find('input[type="checkbox"]')
+      .check({ force: true })
 
     //email form input text
-    cy.contains('nb-card', 'Inline form').find('[data-cy="eMailForm1"]')
-      .click()
-      .type('test@mail.com')
+
     cy.get('[data-cy="submitButtonMain"]')
       .click()
 
