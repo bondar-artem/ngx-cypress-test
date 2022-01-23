@@ -89,7 +89,7 @@
     "@types/node": "6.0.90",
     "codelyzer": "^5.0.1",
     "conventional-changelog-cli": "^2.2.2",
-    "cypress": "^9.2.1",
+    "cypress": "^9.3.1",
     "husky": "0.13.3",
     "jasmine-core": "2.6.4",
     "jasmine-spec-reporter": "4.1.1",
