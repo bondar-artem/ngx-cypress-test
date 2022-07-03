@@ -1,32 +1,30 @@
- <reference types = "cypress" />
+/// <reference types="cypress" />
 
 describe("Login page and login data filled", () => {
-
   it("Form login page test1", () => {
+    cy.visit("/");
+    cy.contains("Forms").click();
+    cy.contains("Form Layout").click();
 
-    cy.visit("/")
-    cy.contains("Forms").click()
-    cy.contains('Form Layout').click()
-
-    //add name 
-    cy.contains('nb-card', 'Inline form').find('[placeholder="Jane Doe"]')
+    //add name
+    cy.contains("nb-card", "Inline form")
+      .find('[placeholder="Jane Doe"]')
       .click()
-      .type('Milos Lazic')
+      .type("Milos Lazic");
 
-    cy.get('nb-card-body')
-      .should('contain.text', 'Email')
+    cy.get("nb-card-body")
+      .should("contain.text", "Email")
       .get('[data-cy="Email2"]')
       .click()
-      .type('milos@gmail.com')
+      .type("milos@gmail.com");
 
     //checkbox testing
     cy.get('[data-cy="inlinecheckbox"]')
-      .find('label')
+      .find("label")
       .find('input[type="checkbox"]')
-      .should('not.contain.text')
+      .should("not.contain.text")
       .check({ force: true })
-      .should('be.checked')
-
+      .should("be.checked");
 
     //email form input text
 
@@ -34,28 +32,27 @@ describe("Login page and login data filled", () => {
     // .click()
 
     //Add email and password info
-    cy.contains('nb-card', 'Horizontal form').find('[type="email"]')
+    cy.contains("nb-card", "Horizontal form")
+      .find('[type="email"]')
       .click()
-      .type('milos@gmail.com')
+      .type("milos@gmail.com");
 
     //input password field
-    cy.contains('nb-card', 'Horizontal form').find('#inputPassword3')
+    cy.contains("nb-card", "Horizontal form")
+      .find("#inputPassword3")
       .click()
-      .type('smederevo026')
+      .type("smederevo026");
 
     //check-box and sign in button activated
-    cy.get('#inputEmail3')
-      .parents('form')
-      .find('button')
-      .should('contain', 'Sign in')
-      .parents('form')
-      .find('nb-checkbox').click()
+    cy.get("#inputEmail3")
+      .parents("form")
+      .find("button")
+      .should("contain", "Sign in")
+      .parents("form")
+      .find("nb-checkbox")
+      .click();
 
-    cy.get('[status="warning"]')
-
-
-
-
+    cy.get('[status="warning"]');
 
     //by tag name
     //y.get("input")
@@ -76,6 +73,5 @@ describe("Login page and login data filled", () => {
 
     //
     //cy.get('[data-cy="signInButton"]')
-  })
-
-})
+  });
+});
