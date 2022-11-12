@@ -3,17 +3,6 @@ import { onFormLayoutsPage } from "../support/page_objects/formLayoutsPage"
 import { onDatePickerPage } from "../support/page_objects/datepickerPage"
 import { onSmartTablePage } from "../support/page_objects/smartTablePage"
 
-const runOn = (browser, fn) => {
-    if (Cypress.isBrowser(browser)) {
-      fn()
-    }
-  }
-  
-  const ignoreOn = (browser, fn) => {
-    if (!Cypress.isBrowser(browser)) {
-      fn()
-    }
-  }
 
 describe('Test with Page Objects', () => {
 
@@ -21,7 +10,6 @@ describe('Test with Page Objects', () => {
         cy.openHomePage()
     })
 
-ignoreOn('firefox', () => {
     it('verify navigations actoss the pages', () => {
         navigateTo.formLayoutsPage()
         navigateTo.datepickerPage()
@@ -29,7 +17,6 @@ ignoreOn('firefox', () => {
         navigateTo.tooltipPage()
         navigateTo.toasterPage()
     })
-})
     
 
     it(' should submit Inline and Basic form and select tomorrow date in the calendar', () => {
