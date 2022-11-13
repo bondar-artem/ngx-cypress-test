@@ -8,6 +8,7 @@ module.exports = defineConfig({
   video: false,
   defaultCommandTimeout: 10000,
   projectId: 'soeotu',
+  experimentalWebKitSupport: true,
   env: {
     'cypress-plugin-snapshots': {
       imageConfig: {
