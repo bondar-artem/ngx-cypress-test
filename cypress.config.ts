@@ -3,8 +3,8 @@ import { defineConfig } from 'cypress'
 export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:4200',
-    specPattern: '**/*.e2e.{1-getting-started,2-advanced-examples}',
-    viewportHeight: 768,
-    viewportWidth: 1024
+    viewportHeight: 1080,
+    viewportWidth: 1920,
+    specPattern: 'cypress/e2e/*.{js,jsx,ts,tsx}'
   }
 })
