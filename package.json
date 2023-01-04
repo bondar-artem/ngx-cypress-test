@@ -93,7 +93,7 @@
     "@types/node": "6.0.90",
     "codelyzer": "^5.0.1",
     "conventional-changelog-cli": "^2.1.1",
-    "cypress": "^10.11.0",
+    "cypress": "12.3.0",
     "husky": "0.13.3",
     "npm-run-all": "4.0.2",
     "playwright-webkit": "^1.27.1",
