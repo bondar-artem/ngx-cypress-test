@@ -45,7 +45,11 @@ describe ('Our first suite', () => {
     cy.contains('Forms').click(); // searching elements with the name Forms
     cy.contains('Form Layouts').click();
 
+    cy.get('[data-cy="signInButton"]');
 
+    cy.contains('Sign in');
+
+    cy.contains('[status="warning"]','Sign in');
   });
 
 });
