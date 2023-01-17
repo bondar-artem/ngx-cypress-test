@@ -2,7 +2,7 @@
 
 describe ('Our first suite', () => {
 
-  it('first test', () => {
+  it.only('first test', () => {
 
     cy.visit('/'); // visit the baseUrl from config file
     cy.contains('Forms').click(); // searching elements with the name Forms
@@ -24,7 +24,7 @@ describe ('Our first suite', () => {
     cy.get('[placeholder="Email"]');
 
 // by Class value
-    cy.get('[class = "input-full-width size-medium shape-rectangle"]')  // finding by all of the included classes only
+    cy.get('[class = "input-full-width size-medium shape-rectangle"]');  // finding by all the included classes only
 
 // by Tag Name and Attribute with value
     cy.get('input[placeholder="Email"]');
@@ -34,12 +34,9 @@ describe ('Our first suite', () => {
 
 // by Tag Name, Attribute with value, ID and Class name
     cy.get('input[placeholder="Email"]#inputEmail.input-full-width');
-
-// The most recommended way by Cypress
-    cy.get('[data="inputEmail"]');
   });
 
-  it.only('second test', () => {
+  it('second test', () => {
 
     cy.visit('/'); // visit the baseUrl from config file
     cy.contains('Forms').click(); // searching elements with the name Forms
@@ -49,7 +46,7 @@ describe ('Our first suite', () => {
 
     cy.contains('Sign in');
 
-    cy.contains('[status="warning"]','Sign in');
+    cy.contains('[status="warning"]', 'Sign in');
   });
 
 });
