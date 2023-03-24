@@ -12,7 +12,7 @@
   "scripts": {
     "ng": "ng",
     "conventional-changelog": "conventional-changelog",
-    "start": "if [ $(node -e \"process.stdout.write(require('os').platform())\") = 'darwin' ]; then sh start-Darwin.sh; elif [ $(node -e \"process.stdout.write(require('os').platform())\") = 'linux' ]; then sh start-Linux.sh; else sh scripts/start-Windows_NT.sh; fi",
+    "start": "if [ $(node -e \"process.stdout.write(require('os').platform())\") = 'darwin' ]; then sh start-Linux.sh; elif [ $(node -e \"process.stdout.write(require('os').platform())\") = 'linux' ]; then sh start-Linux.sh; else sh scripts/start-Windows_NT.sh; fi",
     "build": "ng build",
     "build:prod": "npm run build -- --prod --aot",
     "test": "ng test",
