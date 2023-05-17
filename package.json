@@ -11,6 +11,7 @@
   },
   "scripts": {
     "cypress-smoke:e2e":"start-server-and-test start http://localhost:4200 cypress:smoke",
+    "cypress-regression:e2e":"start-server-and-test start http://localhost:4200 cypress:smoke",
     "cypress:smoke": "npx cypress run --headless --spec cypress/e2e/smoke/",
     "cypress:regression": "npx cypress run --headless --spec cypress/e2e/regression/",
     "ng": "ng",
