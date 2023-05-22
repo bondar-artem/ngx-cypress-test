@@ -12,6 +12,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install dep-es
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Cypress run
         run: npm run cypress-smoke:e2e
