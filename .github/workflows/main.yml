@@ -11,9 +11,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Install dep-es
+        run: npm install --force
       - name: Cypress run
-        uses: cypress-io/github-action@v5
-        with:
-          start: npm start
-          wait-on: 'http://localhost:4200'
-          wait-on-timeout: 60
+        run: npm run cypress-smoke:e2e
