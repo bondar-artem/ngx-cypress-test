@@ -49,3 +49,10 @@ cypress.env.json
 cypress/results
 cypress/screenshots
 mochawesome-report
+
+
+#extra CI
+.dockerignore
+docker-compose.yml
+Dockerfile
+dockerReports/
