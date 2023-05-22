@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Dependencies Install
-        run: npm install
+        run: npm install --force
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
