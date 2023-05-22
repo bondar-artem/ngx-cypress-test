@@ -10,10 +10,11 @@
     "url": "https://github.com/akveo/ngx-admin/issues"
   },
   "scripts": {
-    "merge": "npx mochawesome-merge \"cypress/results/mockawesome/*.json\" > mockawesome.json && npx marge mockawesome.json",
-    "delete:reports": "rm -r cypress/results/* || true",
+    "start:e2e": "npm run delete:reports && npm run cypress-smoke:e2e && npm run junit:merge && npm run mochawesome:merge",
+    "mochawesome:merge": "npx mochawesome-merge \"cypress/results/mockawesome/*.json\" > mockawesome.json && npx marge mockawesome.json",
+    "junit:merge": "npx junit-merge -d cypress/results/junit -o cypress/results/junit/result.xml",
+    "delete:reports": "npx rimfar cypress\\results\\*",
     "cypress-var": "npx cypress open --env user=$USER_NAME,password=$PASSWORD",
-    "cypress-var2": "npx cypress open",
     "cypress-smoke:e2e": "start-server-and-test start http://localhost:4200 cypress:smoke",
     "cypress-regression:e2e": "start-server-and-test start http://localhost:4200 cypress:regression ",
     "cypress:smoke": "npx cypress run --record --key a68eb59e-0fd5-49ba-a032-eb06dff62963 --headless --spec cypress/e2e/smoke/",
@@ -102,6 +103,7 @@
     "codelyzer": "^5.0.1",
     "conventional-changelog-cli": "^2.1.1",
     "cypress-multi-reporters": "^1.6.3",
+    "cypress-real-events": "^1.8.1",
     "husky": "0.13.3",
     "junit-merge": "^2.0.0",
     "mocha-junit-reporter": "^2.2.0",
