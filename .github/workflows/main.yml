@@ -12,5 +12,5 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          start: npm start
+          start: npm start --legacy-peer-deps
           browser: chrome
