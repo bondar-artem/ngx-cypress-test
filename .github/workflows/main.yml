@@ -9,11 +9,11 @@ jobs:
   cypress-run:
     runs-on: ubuntu-22.04
     
-    strategy:
-      fail-fast: false
-      matrix:
-        # run copies of the current job in parallel
-        containers: [1, 2, 3, 4, 5]
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         # run copies of the current job in parallel
+#         containers: [1, 2, 3, 4, 5]
         
     steps:
       - name: Checkout
@@ -31,6 +31,7 @@ jobs:
         with:
 #           install: false
           install-command: 'npm i --legacy-peer-deps'
+          working-directory: examples/wait-on
           start: npm start
           wait-on: 'http://localhost:4200/'
           wait-on-timeout: 110
