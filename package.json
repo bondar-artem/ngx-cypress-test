@@ -22,7 +22,7 @@
     "ng": "ng",
     "conventional-changelog": "conventional-changelog",
     "start:second":"run-script-os",
-    "start": "ng serve",
+    "start": "run-script-os",
     "start:win32": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve",
     "start:darwin:linux": "export NODE_OPTIONS=--openssl-legacy-provider && ng serve",
     "build": "ng build",
