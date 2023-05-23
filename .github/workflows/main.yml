@@ -29,10 +29,10 @@ jobs:
 
       #Github approach
       - name: Cypress approach
+         run:unset NODE_OPTIONS
         uses: cypress-io/github-action@v5
         with:
           install-command: 'npm i --legacy-peer-deps'
-          run: unset NODE_OPTIONS
           start: npm start
           wait-on: 'http://[::1]:4200/'
           wait-on-timeout: 110
