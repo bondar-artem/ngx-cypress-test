@@ -41,5 +41,5 @@ jobs:
           record: true
           parallel: true
         env:
-          CYPRESS_RECORD_KEY: ${{secrets.GITHUB_TOKEN}}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           
