@@ -28,8 +28,9 @@ jobs:
 #         run: npm run cypress-smoke:e2e
 
       #Github approach
+      - name: Reset Node
+        run:  unset NODE_OPTIONS
       - name: Cypress approach
-         run:unset NODE_OPTIONS
         uses: cypress-io/github-action@v5
         with:
           install-command: 'npm i --legacy-peer-deps'
