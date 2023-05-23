@@ -31,7 +31,6 @@ jobs:
         with:
 #           install: false
           install-command: 'npm i --legacy-peer-deps'
-          working-directory: examples/wait-on
           start: npm start
           wait-on: 'http://localhost:4200/'
           wait-on-timeout: 110
