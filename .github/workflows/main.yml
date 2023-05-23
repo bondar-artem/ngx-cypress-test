@@ -32,4 +32,4 @@ jobs:
 #           install: false
           install-command: 'npm i --legacy-peer-deps'
           start: npm start
-          wait-on: 'http://localhost:4200/'
+#           wait-on: 'http://localhost:4200/'
