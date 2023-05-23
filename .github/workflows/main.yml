@@ -8,12 +8,14 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
+    container: cypress/browsers:node16.16.0-chrome107-ff107-edge
+
     
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         # run copies of the current job in parallel
-#         containers: [1, 2, 3, 4, 5]
+    strategy:
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [1, 2, 3, 4, 5]
         
     steps:
       - name: Checkout
@@ -29,9 +31,11 @@ jobs:
       - name: Cypress approach
         uses: cypress-io/github-action@v5
         with:
-#           install: false
           install-command: 'npm i --legacy-peer-deps'
           start: npm start
           wait-on: 'http://[::1]:4200/'
           wait-on-timeout: 110
+          record: true
+          parallel: true
+          
           
