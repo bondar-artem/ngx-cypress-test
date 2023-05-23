@@ -37,7 +37,8 @@ jobs:
           start: npm start
           wait-on: 'http://[::1]:4200/'
           wait-on-timeout: 110
-          runTests : npm run cypress:smoke
+#           runTests : npm run cypress:smoke
+          spec: 'cypress/e2e/smoke/'
           record: true
           parallel: true
         env:
