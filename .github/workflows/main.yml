@@ -29,6 +29,6 @@ jobs:
       - name: Cypress approach
         uses: cypress-io/github-action@v5
         with:
-          record: true
-          parallel: true
-          start: npm start
+          npm_install_command: 'npm i --legacy-peer-deps'
+          start: npm run start
+          wait-on: 'http://localhost:3000'
