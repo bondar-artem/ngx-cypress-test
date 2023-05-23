@@ -7,7 +7,7 @@ on:
       
 jobs:
   cypress-run:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 #     container: cypress/browsers:node16.16.0-chrome107-ff107-edge
 
     
@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         # run copies of the current job in parallel
-        containers: [1, 2, 3, 4, 5]
+        containers: [1, 2]
         
     steps:
       - name: Checkout
@@ -41,5 +41,5 @@ jobs:
           record: true
           parallel: true
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          CYPRESS_RECORD_KEY: ${{secrets.GITHUB_TOKEN}}
           
