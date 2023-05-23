@@ -15,6 +15,6 @@ jobs:
       - name: Install dep-es
         run: npm install --legacy-peer-deps     
       - name: Cypress run
-        run: npm run cypress-smoke:e2e
+        run: npm run cypress-regression:e2e
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
