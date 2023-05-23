@@ -30,6 +30,6 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
 #           install: false
-          install-command': 'npm i --legacy-peer-deps'
+          install-command: 'npm i --legacy-peer-deps'
           start: npm start
           wait-on: 'http://localhost:4200'
