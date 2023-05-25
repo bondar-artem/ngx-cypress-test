@@ -3,7 +3,7 @@ name: Cypress Master Tests
 on:
   push:
     branches:
-      - 'master'
+      - 'qa'
       
 jobs:
   cypress-run:
