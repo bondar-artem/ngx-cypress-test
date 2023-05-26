@@ -6,6 +6,5 @@ export default {
  email : "mail@mymail.com",
  age : 13,
  ageLength : 2,
- newPassword : "NewTestPassword",
-
+ newPassword : "",
 }

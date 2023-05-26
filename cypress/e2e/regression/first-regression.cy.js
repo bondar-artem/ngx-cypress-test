@@ -12,6 +12,7 @@ describe("First regression suite", () => {
 
   beforeEach("Open application", () => {
     cy.visit(Cypress.env("baseUrl") + "/pages");
+    
   });
   it("Stepper verification", () => {
     cy.contains("Layout").click();
