@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe("First smoke suite", () => {
+describe("Second regression suite", () => {
   const name = "Kirill";
   const lastName = "Petrov";
   const movie = "Avatar";
