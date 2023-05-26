@@ -1,12 +1,14 @@
 import apiData from "../../fixtures/apiData";
-import personCreds from "../../fixtures/personCreds";
 
 describe("Reqres basic tests", () => {
   it("Get user ID and verify user name.", () => {
     cy.request({
       method: "POST",
       url: "https://reqres.in/api/register",
-      body: personCreds,
+      body: {
+        "email": Cypress.env('email'),
+        "password": Cypress.env('password')
+      },
     })
       .its("body")
       .should("nested.include", { id: 1 })
