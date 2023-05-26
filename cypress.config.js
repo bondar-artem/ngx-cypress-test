@@ -7,7 +7,8 @@ module.exports = defineConfig({
   env: {
     baseUrl: "http://localhost:4200/",
     user: "dummy",
-    password: "dummy",
+    newPassword:"",
+    password:""
   },
   reporter: "cypress-multi-reporters",
   reporterOptions: {
@@ -15,12 +16,9 @@ module.exports = defineConfig({
   },
   e2e: {
     setupNodeEvents(on, config) {
-      const user = process.env.USER_NAME;
+      const newPassword = process.env.NEW_PASSWORD
       const password = process.env.PASSWORD;
-      // if (!password || !user) {
-      //     throw new Error("You did not provide password or username");
-      //   }
-      config.env = { user, password };
+      config.env = { newPassword, password };
       return config;
     },
     specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx}",

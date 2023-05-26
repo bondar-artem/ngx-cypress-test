@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe("First smoke suite", () => {
+describe("First regression suite", () => {
   const name = "Kirill";
   const lastName = "Petrov";
   const movie = "Avatar";
@@ -12,6 +12,7 @@ describe("First smoke suite", () => {
 
   beforeEach("Open application", () => {
     cy.visit(Cypress.env("baseUrl") + "/pages");
+    
   });
   it("Stepper verification", () => {
     cy.contains("Layout").click();

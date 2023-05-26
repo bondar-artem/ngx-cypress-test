@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe("First smoke suite", () => {
+describe("Second regression suite", () => {
   const name = "Kirill";
   const lastName = "Petrov";
   const movie = "Avatar";
@@ -8,7 +8,6 @@ describe("First smoke suite", () => {
   const email = "mail@mymail.com";
   const age = 13;
   const ageLength = 2;
-  const newPassword = "NewTestPassword";
 
   beforeEach("Open application", () => {
     cy.visit(Cypress.env("baseUrl") + "/pages");
@@ -120,11 +119,11 @@ describe("First smoke suite", () => {
     beforeEach("Go to reset password,type new password", () => {
       cy.contains("Auth").click();
       cy.contains("Reset Password").click();
-      cy.get("#input-password").type(newPassword);
+      cy.get("#input-password").type(Cypress.env('newPassword'));
     });
 
     it("Positive password reset.", () => {
-      cy.get("#input-re-password").type(newPassword);
+      cy.get("#input-re-password").type(Cypress.env('newPassword'));
       cy.get("form button").click();
       cy.get("nb-menu").should("be.visible");
     });
