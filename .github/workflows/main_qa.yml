@@ -1,0 +1,36 @@
+name: Cypress Dev  Tests
+
+on:
+  push:
+    branches:
+      - 'qa'
+      
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]
+        
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Write the cypress.env.json file 📝 
+        run: |
+          echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
+          
+      - name: Cypress dev tests
+        uses: cypress-io/github-action@v5
+        with:
+          install-command: 'npm i --legacy-peer-deps'
+          start: npm start
+          wait-on: 'http://[::1]:4200/'
+          wait-on-timeout: 110
+          spec: 'cypress/e2e/regression/'
+          record: true
+          parallel: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          
