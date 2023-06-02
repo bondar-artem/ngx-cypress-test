@@ -143,4 +143,3 @@ describe("Second regression suite", () => {
     });
   });
 });
-//new code line (probably with some bugs)
