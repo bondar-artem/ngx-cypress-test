@@ -1,5 +1,5 @@
 ✨ This is the pet-project with the Cypress Ui and API tests, GitHub actions, and Cypress Dashboard.✨ <br>
-You can watch the short video overview by this 👉  https://youtu.be/LNNeiPkSfTA  youtube link. <br>
+You can watch the short video overview by this 👉  https://youtu.be/0hAedfUgipA  youtube link. <br>
 <br>
 To view the project:<br>
 ✅Clone repo on your local machine<br>
