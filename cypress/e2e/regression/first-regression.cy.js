@@ -12,8 +12,8 @@ describe("First regression suite", () => {
 
   beforeEach("Open application", () => {
     cy.visit(Cypress.env("baseUrl") + "/pages");
-    
   });
+
   it("Stepper verification", () => {
     cy.contains("Layout").click();
     cy.contains("Stepper").click();
@@ -43,6 +43,7 @@ describe("First regression suite", () => {
       .eq(2)
       .should("have.class", "completed");
   });
+
   it("Accordion verification", () => {
     cy.contains("Layout").click();
     cy.contains("Accordion").click();
@@ -50,6 +51,7 @@ describe("First regression suite", () => {
     cy.contains("Product Details").click();
     cy.get(".item-body").eq(0).should("be.visible");
   });
+
   it("Verify form", () => {
     cy.intercept("GET", "/sockjs-node/info?t=*").as("submitReq");
     cy.contains("Forms").click();
@@ -61,6 +63,7 @@ describe("First regression suite", () => {
     cy.get('.form-inline [placeholder="Jane Doe"]').should("be.empty");
     cy.get('.form-inline [placeholder="Email"]').should("be.empty");
   });
+
   it("Verify modal window", () => {
     cy.contains("Modal & Overlays").click();
     cy.contains("Dialog").click();
@@ -74,6 +77,7 @@ describe("First regression suite", () => {
     cy.get("nb-dialog-container").should("be.visible").find("button").click();
     cy.get("nb-dialog-container").should("not.exist");
   });
+
   it("Verify popover", () => {
     cy.contains("Modal & Overlays").click();
     cy.contains("Popover").click();
@@ -84,6 +88,7 @@ describe("First regression suite", () => {
       "Hello, how are you today?"
     );
   });
+
   it("Verify toastr", () => {
     cy.contains("Modal & Overlays").click();
     cy.contains("Toastr").click();
@@ -94,6 +99,7 @@ describe("First regression suite", () => {
     cy.wait(3000);
     cy.get("nb-toast").should("not.exist");
   });
+
   it("Verify table data, create new table row.", () => {
     cy.contains("Tables & Data").click();
     cy.contains("Smart Table").click();
@@ -117,6 +123,7 @@ describe("First regression suite", () => {
         cy.wrap(createdTable).find("td").eq(5).should("have.text", email);
       });
   });
+
   context("Reset password suite", () => {
     beforeEach("Go to reset password,type new password", () => {
       cy.contains("Auth").click();
@@ -129,6 +136,7 @@ describe("First regression suite", () => {
       cy.get("form button").click();
       cy.get("nb-menu").should("be.visible");
     });
+
     it("Negative reset > Confirm password incorrect. ", () => {
       cy.get("#input-re-password").type("newPassword");
       cy.get("form button").click();
@@ -136,6 +144,7 @@ describe("First regression suite", () => {
         .should("be.visible")
         .and("contain", "Password does not match the confirm password.");
     });
+
     it("Negative reset > Confirm password empty. ", () => {
       cy.get("#input-re-password").clear();
       cy.get("#input-password").click();
