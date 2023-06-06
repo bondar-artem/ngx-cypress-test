@@ -4,7 +4,7 @@ describe("Reqres basic tests", () => {
   it("Get user ID and verify user name.", () => {
     cy.request({
       method: "POST",
-      url: "https://reqres.in/api/register",
+      url: Cypress.env("api_url")+"/register",
       body: {
         "email": Cypress.env('email'),
         "password": Cypress.env('password')
@@ -15,18 +15,18 @@ describe("Reqres basic tests", () => {
       .then((res) => cy.wrap(res.id).as("userID"));
 
     cy.get("@userID").then((userID) => {
-      cy.request("GET", `https://reqres.in/api/users/${userID}`)
+      cy.request("GET", Cypress.env("api_url")+`/users/${userID}`)
         .its("body.data")
         .should("nested.include", { first_name: "George" });
     });
   });
 
   it("Resource: get list of resources, single resource, negative resource responce.", () => {
-    cy.request("GET", "https://reqres.in/api/unknown/2")
+    cy.request("GET", Cypress.env("api_url")+"/unknown/2")
       .its("body.data")
       .should("deep.equal", apiData);
 
-    cy.request("GET", "https://reqres.in/api/unknown")
+    cy.request("GET", Cypress.env("api_url")+"/unknown")
       .its("body")
       .should("nested.include", {
         page: 1,
@@ -40,7 +40,7 @@ describe("Reqres basic tests", () => {
 
     cy.request({
       method: "GET",
-      url: "https://reqres.in/api/unknown/99",
+      url: Cypress.env("api_url")+"/unknown/99",
       failOnStatusCode: false,
     })
       .its("status")
@@ -48,7 +48,7 @@ describe("Reqres basic tests", () => {
   });
 
   it("Create/ Update/ Delete ", () => {
-    cy.request("POST", "https://reqres.in/api/users", {
+    cy.request("POST", Cypress.env("api_url")+"/users", {
       name: "morpheus",
       job: "succer",
     })
@@ -63,7 +63,7 @@ describe("Reqres basic tests", () => {
       });
 
     cy.get("@personId").then((personId) => {
-      cy.request("PATCH", `https://reqres.in/api/users/${personId}`, {
+      cy.request("PATCH", Cypress.env("api_url")+`/users/${personId}`, {
         name: "morpheus",
         job: "winner",
       })
@@ -77,14 +77,14 @@ describe("Reqres basic tests", () => {
           expect(body.updatedAt).to.include(createdAtLocal);
         });
 
-      cy.request("DELETE", `https://reqres.in/api/users/${personId}`)
+      cy.request("DELETE", Cypress.env("api_url")+`/users/${personId}`)
         .its("status")
         .should("eql", 204);
     });
   });
 
   it("User Register (Positive + Negative)", () => {
-    cy.request("POST", "https://reqres.in/api/register", {
+    cy.request("POST", Cypress.env("api_url")+"/register", {
       email: "george.bluth@reqres.in",
       password: "SuperKek",
     })
@@ -97,7 +97,7 @@ describe("Reqres basic tests", () => {
       });
     cy.request({
       method: "POST",
-      url: "https://reqres.in/api/register",
+      url: Cypress.env("api_url")+"/register",
       body: { email: "george.bluth@reqres.in" },
       failOnStatusCode: false,
     })
@@ -105,4 +105,3 @@ describe("Reqres basic tests", () => {
       .should("eq", 400);
   });
 });
-//NEw code line (probably with some bugs)
