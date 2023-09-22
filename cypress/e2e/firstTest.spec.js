@@ -221,6 +221,24 @@ describe('First test suite', () => {
             cy.wrap(tableColumns).eq(3).should('contain', 'Smith')
         })
 
+       
+
+        //3 Get each row validation
+        const age = [20, 30, 40, 200]
+
+        cy.wrap(age).each( age => {
+            cy.get('thead [placeholder="Age"]').clear().type(age)
+            cy.wait(500)
+            cy.get('tbody tr').each( tableRow => {
+                if( age == 200){
+                    cy.wrap(tableRow).should('contain', 'No data found')
+                } else {
+                    cy.wrap(tableRow).find('td').eq(6).should('contain', age)
+                }
+            })
+        })
+        
+
     })
 
 })
