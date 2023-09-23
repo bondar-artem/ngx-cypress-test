@@ -1,56 +1,58 @@
 /// <reference types="cypress" />
 
-describe('Our first suite', () => {
+describe('First test suite', () => {
 
     it('first test', () => {
 
         cy.visit('/')
         cy.contains('Forms').click()
         cy.contains('Form Layouts').click()
-
-        //by Tag Name
+        
+        //by Tag name
         cy.get('input')
 
-        //by ID
+        // by ID
         cy.get('#inputEmail1')
 
-        //by Class name
+        //by Class value
         cy.get('.input-full-width')
 
         //by Attribute name
-        cy.get('[placeholder]')
+        cy.get('[fullwidth]')
 
-        //by Attribute name and value
+        //by Attribute and value
         cy.get('[placeholder="Email"]')
 
-        //by Class value
+        //by entire Class value
         cy.get('[class="input-full-width size-medium shape-rectangle"]')
 
-        //by Tag name and Attribute with value
-        cy.get('input[placeholder="Email"]')
+        //by two attributes
+        cy.get('[placeholder="Email"][fullwidth]')
 
-        //by two different attributes
-        cy.get('[placeholder="Email"][type="email"]')
-
-        //by tag name, Attribute with value, ID and Class name
+        //by tag, attribute id and class
         cy.get('input[placeholder="Email"]#inputEmail1.input-full-width')
 
-        //The most recommended way by Cypress
+        //by cypress test ID
         cy.get('[data-cy="imputEmail1"]')
     })
 
     it('second test', () => {
-
         cy.visit('/')
         cy.contains('Forms').click()
         cy.contains('Form Layouts').click()
 
-        cy.get('[data-cy="signInButton"]')
+        //Theory
+        // get() - find elements on the page by locator globally
+        // find() - find child elements by locator
+        // contains() - find HTML text and by text and locator
 
         cy.contains('Sign in')
+        cy.contains('[status="warning"]', 'Sign in')
+        cy.contains('nb-card', 'Horizontal form').find('button')
+        cy.contains('nb-card', 'Horizontal form').contains('Sign in')
+        cy.contains('nb-card', 'Horizontal form').get('button')
 
-        cy.contains('[status="warning"]','Sign in')
-
+        //cypress chains and DOM
         cy.get('#inputEmail3')
             .parents('form')
             .find('button')
@@ -58,214 +60,175 @@ describe('Our first suite', () => {
             .parents('form')
             .find('nb-checkbox')
             .click()
+    }) 
 
-        cy.contains('nb-card', 'Horizontal form').find('[type="email"]')
-
-    })
-
-    it('then and wrap methods', () => {
-
+    it('save subject of the command', () => {
         cy.visit('/')
         cy.contains('Forms').click()
         cy.contains('Form Layouts').click()
 
-        // cy.contains('nb-card', 'Using the Grid').find('[for="inputEmail1"]').should('contain', 'Email')
-        // cy.contains('nb-card', 'Using the Grid').find('[for="inputPassword2"]').should('contain', 'Password')
-        // cy.contains('nb-card', 'Basic form').find('[for="exampleInputEmail1"]').should('contain', 'Email address')
-        // cy.contains('nb-card', 'Basic form').find('[for="exampleInputPassword1"]').should('contain', 'Password')
+        cy.contains('nb-card', 'Using the Grid').find('[for="inputEmail1"]').should('contain', 'Email')
+        cy.contains('nb-card', 'Using the Grid').find('[for="inputPassword2"]').should('contain', 'Password')
 
-        //selenium
-        // const fistForm = cy.contains('nb-card', 'Using the Grid')
-        // const secondForm = cy.contains('nb-card', 'Basic form')
+        // CANT DO THING LIKE THIS
+        // const usingTheGrid = cy.contains('nb-card', 'Using the Grid')
+        // usingTheGrid.find('[for="inputEmail1"]').should('contain', 'Email')
+        // usingTheGrid.find('[for="inputPassword2"]').should('contain', 'Password')
 
-        // fistForm.find('[for="inputEmail1"]').should('contain', 'Email')
-        // fistForm.find('[for="inputPassword2"]').should('contain', 'Password')
-        // secondForm.find('[for="exampleInputEmail1"]').should('contain', 'Email address')
+        // 1 Cypress Alias
+        cy.contains('nb-card', 'Using the Grid').as('usingTheGrid')
+        cy.get('@usingTheGrid').find('[for="inputEmail1"]').should('contain', 'Email')
+        cy.get('@usingTheGrid').find('[for="inputPassword2"]').should('contain', 'Password')
 
-        //cypress style
-
-        cy.contains('nb-card', 'Using the Grid').then( firstForm => {
-            const emailLabelFirst = firstForm.find('[for="inputEmail1"]').text()
-            const passwordLabelFirst = firstForm.find('[for="inputPassword2"]').text()
-            expect(emailLabelFirst).to.equal('Email')
-            expect(passwordLabelFirst).to.equal('Password')
-
-            cy.contains('nb-card', 'Basic form').then( secondForm => {
-                const passwordSecondText = secondForm.find('[for="exampleInputPassword1"]').text()
-                expect(passwordLabelFirst).to.equal(passwordSecondText)
-
-                cy.wrap(secondForm).find('[for="exampleInputPassword1"]').should('contain', 'Password')
-
-            })
+        // 2 Cypress then() methods
+        cy.contains('nb-card', 'Using the Grid').then( usingTheGridForm => {
+            cy.wrap(usingTheGridForm).find('[for="inputEmail1"]').should('contain', 'Email')
+            cy.wrap(usingTheGridForm).find('[for="inputPassword2"]').should('contain', 'Password')
         })
     })
 
-    it('invoke command', () => {
+    it('extract text values', () => {
         cy.visit('/')
         cy.contains('Forms').click()
         cy.contains('Form Layouts').click()
 
         //1
-        cy.get('[for="exampleInputEmail1"]')
-            .should('contain', 'Email address')
-            .should('have.class', 'label')
-            .and('have.text', 'Email address')
+        cy.get('[for="exampleInputEmail1"]').should('contain', 'Email address')
 
         //2
         cy.get('[for="exampleInputEmail1"]').then( label => {
-            expect(label.text()).to.equal('Email address')
-            expect(label).to.have.class('label')
-            expect(label).to.have.text('Email address')
+            const labelText = label.text()
+            expect(labelText).to.equal('Email address')
+            cy.wrap(labelText).should('contain', 'Email address')
         })
 
         //3
         cy.get('[for="exampleInputEmail1"]').invoke('text').then( text => {
             expect(text).to.equal('Email address')
         })
+        cy.get('[for="exampleInputEmail1"]').invoke('text').as('labelText').should('contain', 'Email address')
 
-        cy.contains('nb-card', 'Basic form')
-            .find('nb-checkbox')
-            .click()
-            .find('.custom-checkbox')
-            .invoke('attr', 'class')
-            //.should('contain', 'checked')
-            .then(classValue => {
-                expect(classValue).to.contain('checked')
-            })
+        //4
+        cy.get('[for="exampleInputEmail1"]').invoke('attr', 'class').then( classValue => {
+            expect(classValue).to.equal('label')
+        })
 
-    })
-
-    it('assert property', () => {
-
-        function selectDayFromCurrent(day){
-            let date = new Date()
-            date.setDate(date.getDate() + day)
-            let futureDay = date.getDate()
-            let futureMonth = date.toLocaleString('default', {month: 'short'})
-            let dateAssert = futureMonth+' '+futureDay+', '+date.getFullYear()
-            cy.get('nb-calendar-navigation').invoke('attr', 'ng-reflect-date').then( dateAttribute => {
-                if(!dateAttribute.includes(futureMonth)){
-                    cy.get('[data-name="chevron-right"]').click()
-                    selectDayFromCurrent(day)
-                } else {
-                    cy.get('nb-calendar-day-picker [class="day-cell ng-star-inserted"]').contains(futureDay).click()
-                }
-            })
-            return dateAssert
-        }
-
-        cy.visit('/')
-        cy.contains('Forms').click()
-        cy.contains('Datepicker').click()
-
-        cy.contains('nb-card', 'Common Datepicker').find('input').then( input => {
-            cy.wrap(input).click()
-            let dateAssert = selectDayFromCurrent(2)
-            cy.wrap(input).invoke('prop', 'value').should('contain', dateAssert)
-            cy.wrap(input).should('have.value', dateAssert)
+        //5 invoke property
+        cy.get('#exampleInputEmail1').type('test@test.com')
+        cy.get('#exampleInputEmail1').invoke('prop', 'value').should('contain', 'test@test.com').then( property => {
+            expect(property).to.equal('test@test.com')
         })
     })
 
-    it('radio button', () => {
+    it('radio buttons', () => {
         cy.visit('/')
         cy.contains('Forms').click()
         cy.contains('Form Layouts').click()
 
         cy.contains('nb-card', 'Using the Grid').find('[type="radio"]').then( radioButtons => {
-            cy.wrap(radioButtons)
-                .first()
-                .check({force: true})
-                .should('be.checked')
-
-            cy.wrap(radioButtons)
-                .eq(1)
-                .check({force: true})
-                
-            cy.wrap(radioButtons)
-                .eq(0)
-                .should('not.be.checked')
-                
-            cy.wrap(radioButtons)
-                .eq(2)
-                .should('be.disabled')    
+            cy.wrap(radioButtons).eq(0).check({force: true}).should('be.checked')
+            cy.wrap(radioButtons).eq(1).check({force: true})
+            cy.wrap(radioButtons).eq(0).should('not.be.checked')
+            cy.wrap(radioButtons).eq(2).should('be.disabled')
         })
     })
 
-    it('check boxes', () => {
+    it('checkboxes', () => {
         cy.visit('/')
         cy.contains('Modal & Overlays').click()
         cy.contains('Toastr').click()
 
-        //cy.get('[type="checkbox"]').check({force:true})
-        cy.get('[type="checkbox"]').eq(0).click({force:true})
-        cy.get('[type="checkbox"]').eq(1).check({force:true})
-
+        // cy.get('[type="checkbox"]').uncheck({force: true})
+        cy.get('[type="checkbox"]').eq(0).click({force: true})
+        cy.get('[type="checkbox"]').eq(1).check({force: true})
     })
 
-    it('lists and dropdowns', () => {
+    it('Date picker', () => {
+
+        function selectDayFromCurrent(day){
+            let date = new Date()
+            date.setDate(date.getDate() + day)
+            let futureDay = date.getDate()
+            let futureMonth = date.toLocaleDateString('en-US', {month: 'short'})
+            let futureYear = date.getFullYear()
+            let dateToAssert = `${futureMonth} ${futureDay}, ${futureYear}`
+            cy.get('nb-calendar-navigation').invoke('attr', 'ng-reflect-date').then( dateAttribute => {
+                if(!dateAttribute.includes(futureMonth) || !dateAttribute.includes(futureYear)){
+                    cy.get('[data-name="chevron-right"]').click()
+                    selectDayFromCurrent(day)
+                } else {
+                    cy.get('.day-cell').not('.bounding-month').contains(futureDay).click()
+                }
+            })
+            return dateToAssert
+        }
+
         cy.visit('/')
+        cy.contains('Forms').click()
+        cy.contains('Datepicker').click()
+        cy.contains('nb-card', 'Common Datepicker').find('input').then( input => {
+            cy.wrap(input).click()
+            const dateToAssert = selectDayFromCurrent(200)
+            cy.wrap(input).invoke('prop', 'value').should('contain', dateToAssert)
+            cy.wrap(input).should('have.value', dateToAssert)
+        })
+    })
+
+    it('Lists and dropdowns', () => {
+        cy.visit('/')
+
         //1
         cy.get('nav nb-select').click()
         cy.get('.options-list').contains('Dark').click()
         cy.get('nav nb-select').should('contain', 'Dark')
-        cy.get('nb-layout-header nav').should('have.css', 'background-color', 'rgb(34, 43, 69)')
 
         //2
-        cy.get('nav nb-select').then( dropdown => {
-            cy.wrap(dropdown).click()
+        cy.get('nav nb-select').then( dropDown => {
+            cy.wrap(dropDown).click()
             cy.get('.options-list nb-option').each( (listItem, index) => {
                 const itemText = listItem.text().trim()
-
-                const colors = {
-                    "Light": "rgb(255, 255, 255)",
-                    "Dark": "rgb(34, 43, 69)",
-                    "Cosmic": "rgb(50, 50, 89)",
-                    "Corporate": "rgb(255, 255, 255)"
-                }
-
                 cy.wrap(listItem).click()
-                cy.wrap(dropdown).should('contain', itemText)
-                cy.get('nb-layout-header nav').should('have.css', 'background-color', colors[itemText])
+                cy.wrap(dropDown).should('contain', itemText)
                 if( index < 3){
-                    cy.wrap(dropdown).click()
+                    cy.wrap(dropDown).click()
                 }
             })
         })
     })
 
-    it('Web tables', () => {
+    it.only('Web tables', () => {
         cy.visit('/')
         cy.contains('Tables & Data').click()
         cy.contains('Smart Table').click()
 
-        //1
+        //1 Get the row by text
         cy.get('tbody').contains('tr', 'Larry').then( tableRow => {
             cy.wrap(tableRow).find('.nb-edit').click()
-            cy.wrap(tableRow).find('[placeholder="Age"]').clear().type('25')
+            cy.wrap(tableRow).find('[placeholder="Age"]').clear().type('35')
             cy.wrap(tableRow).find('.nb-checkmark').click()
-            cy.wrap(tableRow).find('td').eq(6).should('contain', '25')
+            cy.wrap(tableRow).find('td').eq(6).should('contain', '35')
         })
 
-        //2
+        //2 Get row by index
         cy.get('thead').find('.nb-plus').click()
         cy.get('thead').find('tr').eq(2).then( tableRow => {
-            cy.wrap(tableRow).find('[placeholder="First Name"]').type('Artem')
-            cy.wrap(tableRow).find('[placeholder="Last Name"]').type('Bondar')
+            cy.wrap(tableRow).find('[placeholder="First Name"]').type("John")
+            cy.wrap(tableRow).find('[placeholder="Last Name"]').type("Smith")
             cy.wrap(tableRow).find('.nb-checkmark').click()
         })
         cy.get('tbody tr').first().find('td').then( tableColumns => {
-            cy.wrap(tableColumns).eq(2).should('contain', 'Artem')
-            cy.wrap(tableColumns).eq(3).should('contain', 'Bondar')
+            cy.wrap(tableColumns).eq(2).should('contain', 'John')
+            cy.wrap(tableColumns).eq(3).should('contain', 'Smith')
         })
 
-        //3
+        //3 Get each row validation
         const age = [20, 30, 40, 200]
 
         cy.wrap(age).each( age => {
             cy.get('thead [placeholder="Age"]').clear().type(age)
             cy.wait(500)
             cy.get('tbody tr').each( tableRow => {
-                if(age == 200){
+                if( age == 200){
                     cy.wrap(tableRow).should('contain', 'No data found')
                 } else {
                     cy.wrap(tableRow).find('td').eq(6).should('contain', age)
@@ -273,9 +236,6 @@ describe('Our first suite', () => {
                
             })
         })
-
-
-
     })
 
     it('tooltip' , () => {
@@ -309,10 +269,5 @@ describe('Our first suite', () => {
         //3
         cy.get('tbody tr').first().find('.nb-trash').click()
         cy.on('window:confirm', () => false)
-
-
     })
-
-
-
 })
