@@ -196,7 +196,7 @@ describe('First test suite', () => {
         })
     })
 
-    it.only('Web tables', () => {
+    it('Web tables', () => {
         cy.visit('/')
         cy.contains('Tables & Data').click()
         cy.contains('Smart Table').click()
