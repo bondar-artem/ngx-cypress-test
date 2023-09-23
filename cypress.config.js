@@ -16,18 +16,18 @@ module.exports = defineConfig({
       },
     },
   },
-  
   e2e: {
-    setupNodeEvents(on, config) {
-      initPlugin(on, config);
-      //on("task", percyHealthCheck);
-    },
-    baseUrl: 'http://localhost:4200/',
+    baseUrl: 'http://localhost:4200',
     excludeSpecPattern: [
-      '**/examples/*',
+      '**/1-getting-started', 
+      '**/2-advanced-examples',
       '**/__snapshots__/*',
       '**/__image_snapshots__/*',
     ],
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
+    setupNodeEvents(on, config) {
+      initPlugin(on, config);
+      //on("task", percyHealthCheck);
+    },
   },
-})
+});
