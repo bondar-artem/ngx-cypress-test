@@ -87,7 +87,7 @@
     "@angular/language-service": "8.0.0",
     "@compodoc/compodoc": "^1.1.11",
     "@fortawesome/fontawesome-free": "^5.2.0",
-    "@percy/cypress": "^2.3.1",
+    "@percy/cypress": "^3.1.2",
     "@types/d3-color": "1.0.5",
     "@types/geojson": "7946.0.8",
     "@types/googlemaps": "^3.30.4",
