@@ -4,6 +4,11 @@ describe("Posts", ()=>{
         cy.api({
             url: `posts/${postId}`,
             method: 'GET',
-          }).its("body").should("deep.include", {id: postId})
+          }).as("getPost")
+          
+          cy.get("@getPost").its("body").should("deep.include", {id: postId});
+
+          cy.get("@getPost").its("status")
+          .should("equal", 200)
         });
     })

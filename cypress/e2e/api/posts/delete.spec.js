@@ -8,5 +8,7 @@ describe("Posts", ()=>{
 
         cy.get("@deletedPost").its("status")
           .should("equal", 200);
+
+        cy.get("@deletedPost").its("body").should("be.empty")
     });
 });
