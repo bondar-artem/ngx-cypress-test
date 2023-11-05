@@ -10,6 +10,7 @@
     "url": "https://github.com/akveo/ngx-admin/issues"
   },
   "scripts": {
+    "cypress:open": "cypress open",
     "ng": "ng",
     "conventional-changelog": "conventional-changelog",
     "start": "run-script-os",
@@ -83,6 +84,7 @@
     "@angular/cli": "^8.0.2",
     "@angular/compiler-cli": "^8.0.0",
     "@angular/language-service": "8.0.0",
+    "@bahmutov/cy-api": "^2.2.6",
     "@compodoc/compodoc": "^1.1.11",
     "@fortawesome/fontawesome-free": "^5.2.0",
     "@types/d3-color": "1.0.5",
@@ -92,6 +94,7 @@
     "@types/node": "6.0.90",
     "codelyzer": "^5.0.1",
     "conventional-changelog-cli": "^2.1.1",
+    "cypress": "^13.3.1",
     "husky": "0.13.3",
     "npm-run-all": "4.0.2",
     "rimraf": "2.6.1",
