@@ -78,32 +78,32 @@ describe('Interaction with Web Elements', ()=>{
     })
 
 
-    // context('Datepicker page', ()=> {
-    //
-    //   beforeEach('Go to Datepicker page', () => {
-    //     cy.visit('/')
-    //     cy.contains('Forms').click()
-    //     cy.contains('Datepicker').click()
-    //   })
-    //
-    //   it.only('Check boxes', () => {
-    //     let date = new Date()
-    //     date.setDate(date.getDate() + 13)
-    //     let futureDate = date.getDate()
-    //     let assertDate = `Nov ${futureDate}, 2023`
-    //     cy.log(assertDate)
-    //
-    //
-    //     cy.log(date.toString())
-    //
-    //     cy.contains('nb-card', 'Common Datepicker').find('input').then(input=>{
-    //       cy.wrap(input).click()
-    //       cy.get('.day-cell').not('.bounding-month').contains('29').click() //select day from active month only
-    //       cy.wrap(input).should('have.value', 'Nov 29, 2023')
-    //     })
-    //   })
-    //
-    //   })
+    context('Datepicker page', ()=> {
+
+      beforeEach('Go to Datepicker page', () => {
+        cy.visit('/')
+        cy.contains('Forms').click()
+        cy.contains('Datepicker').click()
+      })
+
+      it.only('Datepicker', () => {
+        let date = new Date()
+        date.setDate(date.getDate() + 13)
+        let futureDate = date.getDate()
+        let assertDate = `Nov ${futureDate}, 2023`
+        cy.log(assertDate)
+
+
+        cy.log(date.toString())
+
+        cy.contains('nb-card', 'Common Datepicker').find('input').then(input=>{
+          cy.wrap(input).click()
+          cy.get('.day-cell').not('.bounding-month').contains('29').click() //select day from active month only
+          cy.wrap(input).should('have.value', 'Nov 29, 2023')
+        })
+      })
+
+      })
   })
 
 })
