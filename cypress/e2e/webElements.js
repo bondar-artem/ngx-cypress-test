@@ -58,6 +58,52 @@ describe('Interaction with Web Elements', ()=>{
   })
 
 
+  context('Toastr page', ()=> {
 
+    beforeEach('Go to Toastr page', () => {
+      cy.visit('/')
+      cy.contains('Modal & Overlays').click()
+      cy.contains('Toastr').click()
+    })
+
+    it('Check boxes', () => {
+      cy.get('[type="checkbox"]').check({force: true}) //if 3 elements found, it will check all checkboxes found
+
+      // CLICK vs CHECK.
+      // "Click" will click on checkbox no matter it is checked or not
+      // "Check" performs validation of element(checkbox) status and check it if it is unchecked. If checked it will keep it checked
+      cy.get('[type="checkbox"]').eq(0).click({force: true})
+      cy.get('[type="checkbox"]').eq(1).check({force: true})
+
+    })
+
+
+    // context('Datepicker page', ()=> {
+    //
+    //   beforeEach('Go to Datepicker page', () => {
+    //     cy.visit('/')
+    //     cy.contains('Forms').click()
+    //     cy.contains('Datepicker').click()
+    //   })
+    //
+    //   it.only('Check boxes', () => {
+    //     let date = new Date()
+    //     date.setDate(date.getDate() + 13)
+    //     let futureDate = date.getDate()
+    //     let assertDate = `Nov ${futureDate}, 2023`
+    //     cy.log(assertDate)
+    //
+    //
+    //     cy.log(date.toString())
+    //
+    //     cy.contains('nb-card', 'Common Datepicker').find('input').then(input=>{
+    //       cy.wrap(input).click()
+    //       cy.get('.day-cell').not('.bounding-month').contains('29').click() //select day from active month only
+    //       cy.wrap(input).should('have.value', 'Nov 29, 2023')
+    //     })
+    //   })
+    //
+    //   })
+  })
 
 })
