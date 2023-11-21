@@ -76,43 +76,64 @@ describe('Interaction with Web Elements', ()=>{
       cy.get('[type="checkbox"]').eq(1).check({force: true})
 
     })
+  })
 
+  context('Datepicker page', ()=> {
 
-    context('Datepicker page', ()=> {
+    beforeEach('Go to Datepicker page', () => {
+      cy.visit('/')
+      cy.contains('Forms').click()
+      cy.contains('Datepicker').click()
+    })
 
-      beforeEach('Go to Datepicker page', () => {
-        cy.visit('/')
-        cy.contains('Forms').click()
-        cy.contains('Datepicker').click()
-      })
+    it('Datepicker', () => {
 
-      it('Datepicker', () => {
+      function selectFutureDate(days){
+        let date = new Date()
+        date.setDate(date.getDate() + days)
+        let futureDate = date.getDate()
+        let futureMonth = date.toLocaleDateString('en-US', {month: 'short'})
+        let futureYear = date.getFullYear()
+        let assertDate = `${futureMonth} ${futureDate}, ${futureYear}`
 
-        function selectFutureDate(days){
-          let date = new Date()
-          date.setDate(date.getDate() + days)
-          let futureDate = date.getDate()
-          let futureMonth = date.toLocaleDateString('en-US', {month: 'short'})
-          let futureYear = date.getFullYear()
-          let assertDate = `${futureMonth} ${futureDate}, ${futureYear}`
-
-          cy.get('nb-calendar-navigation').invoke('attr', 'ng-reflect-date').then(dateAttribute => {
-            if(!dateAttribute.includes(futureMonth) || !dateAttribute.includes(futureYear)){
-              cy.get('[data-name="chevron-right"]').click()
-              selectFutureDate(days)
-            }else{
-              cy.get('.day-cell').not('.bounding-month').contains(futureDate).click() //select day from active month only
-            }
-          })
-          return assertDate
-        }
-
-        // Test
-        cy.contains('nb-card', 'Common Datepicker').find('input').then(input=>{
-          cy.wrap(input).click()
-          const dateToAssert = selectFutureDate(300)
-          cy.wrap(input).should('have.value', dateToAssert)
+        cy.get('nb-calendar-navigation').invoke('attr', 'ng-reflect-date').then(dateAttribute => {
+          if(!dateAttribute.includes(futureMonth) || !dateAttribute.includes(futureYear)){
+            cy.get('[data-name="chevron-right"]').click()
+            selectFutureDate(days)
+          }else{
+            cy.get('.day-cell').not('.bounding-month').contains(futureDate).click() //select day from active month only
+          }
         })
+        return assertDate
+      }
+
+      // Test
+      cy.contains('nb-card', 'Common Datepicker').find('input').then(input=>{
+        cy.wrap(input).click()
+        const dateToAssert = selectFutureDate(300)
+        cy.wrap(input).should('have.value', dateToAssert)
+      })
+    })
+  })
+
+  it.only('Lists and Dropdowns',()=>{
+    cy.visit('/')
+
+    // #1 Select 1 option in dropdown
+    cy.get('nav nb-select').click()
+    cy.get('nb-option').contains('Dark').click()
+    cy.get('nav nb-select').should('contain.text', 'Dark')
+
+    // #2 Loop through all options
+    cy.get('nav nb-select').then(dropdown => {
+      cy.wrap(dropdown).click()
+      cy.get('ul.options-list nb-option').each((option, index) =>{
+        let optionColor = option.text().trim()
+        cy.wrap(option).click()
+        cy.wrap(dropdown).should('contain', optionColor)
+        if( index < 3) {
+          cy.wrap(dropdown).click()
+        }
       })
     })
   })
