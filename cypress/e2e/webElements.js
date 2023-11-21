@@ -86,24 +86,35 @@ describe('Interaction with Web Elements', ()=>{
         cy.contains('Datepicker').click()
       })
 
-      it.only('Datepicker', () => {
-        let date = new Date()
-        date.setDate(date.getDate() + 13)
-        let futureDate = date.getDate()
-        let assertDate = `Nov ${futureDate}, 2023`
-        cy.log(assertDate)
+      it('Datepicker', () => {
 
+        function selectFutureDate(days){
+          let date = new Date()
+          date.setDate(date.getDate() + days)
+          let futureDate = date.getDate()
+          let futureMonth = date.toLocaleDateString('en-US', {month: 'short'})
+          let futureYear = date.getFullYear()
+          let assertDate = `${futureMonth} ${futureDate}, ${futureYear}`
 
-        cy.log(date.toString())
+          cy.get('nb-calendar-navigation').invoke('attr', 'ng-reflect-date').then(dateAttribute => {
+            if(!dateAttribute.includes(futureMonth) || !dateAttribute.includes(futureYear)){
+              cy.get('[data-name="chevron-right"]').click()
+              selectFutureDate(days)
+            }else{
+              cy.get('.day-cell').not('.bounding-month').contains(futureDate).click() //select day from active month only
+            }
+          })
+          return assertDate
+        }
 
+        // Test
         cy.contains('nb-card', 'Common Datepicker').find('input').then(input=>{
           cy.wrap(input).click()
-          cy.get('.day-cell').not('.bounding-month').contains('29').click() //select day from active month only
-          cy.wrap(input).should('have.value', 'Nov 29, 2023')
+          const dateToAssert = selectFutureDate(300)
+          cy.wrap(input).should('have.value', dateToAssert)
         })
       })
-
-      })
+    })
   })
 
 })
