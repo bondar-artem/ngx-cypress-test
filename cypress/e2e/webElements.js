@@ -57,7 +57,6 @@ describe('Interaction with Web Elements', ()=>{
     })
   })
 
-
   context('Toastr page', ()=> {
 
     beforeEach('Go to Toastr page', () => {
@@ -116,7 +115,7 @@ describe('Interaction with Web Elements', ()=>{
     })
   })
 
-  it.only('Lists and Dropdowns',()=>{
+  it('Lists and Dropdowns',()=>{
     cy.visit('/')
 
     // #1 Select 1 option in dropdown
@@ -136,6 +135,51 @@ describe('Interaction with Web Elements', ()=>{
         }
       })
     })
+  })
+
+  it('Table filtering', ()=>{
+    cy.visit('/')
+    cy.contains('Tables & Data').click()
+    cy.contains('Smart Table').click()
+
+    //Get each row validation
+    const age = [20, 30, 40, 200]
+
+    cy.wrap(age).each( age => {
+      cy.get('thead input[placeholder="Age"]').clear().type(age)
+      cy.wait(1000)
+      cy.get('tbody tr').each(row => {
+        if (age !== 200){
+          cy.wrap(row).find('td').eq(6).should('contain', age)
+        } else {
+          cy.wrap(row).should("contain", "No data found")
+        }
+      })
+    })
+  })
+
+  it('Dialog Box', ()=> {
+    cy.visit('/')
+    cy.contains('Tables & Data').click()
+    cy.contains('Smart Table').click()
+
+    // #1 - problem:  if window confirm event will not fire, validation will not run.
+    // we will not catch that window was not opened. Test will pass always
+    cy.get('tbody tr').first().find('.nb-trash').click()
+    cy.on('window:confirm', (confirm) => {
+      expect(confirm).eq('Are you sure you want to delete?')
+    })
+
+    // #2 - benefit: if window did not show up, stub will be empty. And when we call this object it will not have any message.
+    const stub = cy.stub()
+    cy.on('window:confirm', stub)
+    cy.get('tbody tr').first().find('.nb-trash').click().then(()=> {
+      expect(stub.getCall(0)).to.be.calledWith('Are you sure you want to delete?')
+    })
+
+    // #3 - click cancel in the pop-up/dialog window
+    cy.get('tbody tr').first().find('.nb-trash').click()
+    cy.on('window:confirm', () => false)
   })
 
 })
