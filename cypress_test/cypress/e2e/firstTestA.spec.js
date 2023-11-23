@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+
+
 describe('First test suite', () => {
 
     it('first test', () => {
@@ -154,9 +156,9 @@ describe('First test suite', () => {
 
     })
 
-    it.only('Lists and dropdowns', () => {
+    it('Lists and dropdowns', () => {
         cy.visit('*/*')
-        
+
         //1
         cy.get('nav nb-select').click()
         cy.get('.options-list').contains('Dark').click()
@@ -167,19 +169,61 @@ describe('First test suite', () => {
         cy.get('nav nb-select').should('contain', 'Light')
 
         //2 - Loop for the dropdown
-        cy.get('nav nb-select').then( dropDown => {          
+        cy.get('nav nb-select').then(dropDown => {
             cy.wrap(dropDown).click()
-            cy.get('.options-list nb-option').each( ( listItem, index) => {
-                
+            cy.get('.options-list nb-option').each((listItem, index) => {
+
                 const itemText = listItem.text().trim()
-                cy.wrap(listItem).click() 
+                cy.wrap(listItem).click()
                 cy.wrap(dropDown).should('contain', itemText)
-                
-                if( index < 3){
+
+                if (index < 3) {
                     cy.wrap(dropDown).click()
                 }
             })
         })
 
     })
+
+    it('Web tables', () => {
+        cy.visit('*/*')
+        cy.contains('Tables & Data').click()
+        cy.contains('Smart Table').click()
+
+        // Get the row by text 
+
+        cy.get('tbody')
+        cy.get('tbody').contains('tr', 'Larry').then(tableRow => {
+            cy.wrap(tableRow).find('.nb-edit').click()
+            cy.wrap(tableRow).find('[placeholder="Age"]').clear().type(35)
+            cy.wrap(tableRow).find('.nb-checkmark').click()
+            cy.wrap(tableRow).find('td').eq(6).should('contain', '35')
+        })
+    })
+
+    it.only('Treinando teste acima', () => {
+
+        cy.visit('*/*')
+        cy.contains('Tables & Data').click()
+        cy.contains('Smart Table').click()
+
+        cy.get('thead')
+        cy.get('thead').find('.nb-plus').click()
+        
+        cy.get('thead').find('tr').eq(2).then(tableRow2 => {
+            cy.wrap(tableRow2).find('[placeholder="ID"]').click().type(200)
+            cy.wrap(tableRow2).find('.nb-checkmark').click()
+        })
+
+        cy.get('tbody').find('tr').eq(0).then(tableRow0 => {
+            cy.wrap(tableRow0).find('.ng-star-inserted').should('contain', '200')
+        })
+       
+
+       
+    })
+   
 })
+
+
+
