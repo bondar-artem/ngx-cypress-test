@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import NavigationPage from "../support/page_objects/navigation";
+import NavigationPage from "../support/page_objects/navigation.page";
 import navigationMenu from "../support/static/navigation";
 const navigateTo = new NavigationPage()
 

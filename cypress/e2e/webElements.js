@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import NavigationPage from "../support/page_objects/navigation";
+import NavigationPage from "../support/page_objects/navigation.page";
 const navigateTo = new NavigationPage()
 describe('Interaction with Web Elements', ()=>{
   beforeEach('Open main page',()=> {
