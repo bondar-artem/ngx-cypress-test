@@ -35,3 +35,11 @@
 //     }
 //   }
 // }
+
+/**
+ * @memberof cy
+ * @method openHomePage
+ */
+Cypress.Commands.add('openHomePage', ()=>{
+  cy.visit('/')
+})

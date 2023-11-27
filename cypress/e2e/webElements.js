@@ -1,10 +1,11 @@
 /// <reference types="cypress" />
 
 import NavigationPage from "../support/page_objects/navigation.page";
+import {onDatePickerPage} from "../support/page_objects/datepicker.page";
 const navigateTo = new NavigationPage()
 describe('Interaction with Web Elements', ()=>{
   beforeEach('Open main page',()=> {
-    cy.visit('/')
+    cy.openHomePage()
   })
 
   context('Form Layouts page', ()=>{
@@ -80,31 +81,7 @@ describe('Interaction with Web Elements', ()=>{
 
   it('Datepicker page', ()=> {
     navigateTo.datePickerPage()
-    function selectFutureDate(days){
-      let date = new Date()
-      date.setDate(date.getDate() + days)
-      let futureDate = date.getDate()
-      let futureMonth = date.toLocaleDateString('en-US', {month: 'short'})
-      let futureYear = date.getFullYear()
-      let assertDate = `${futureMonth} ${futureDate}, ${futureYear}`
-
-      cy.get('nb-calendar-navigation').invoke('attr', 'ng-reflect-date').then(dateAttribute => {
-        if(!dateAttribute.includes(futureMonth) || !dateAttribute.includes(futureYear)){
-          cy.get('[data-name="chevron-right"]').click()
-          selectFutureDate(days)
-        }else{
-          cy.get('.day-cell').not('.bounding-month').contains(futureDate).click() //select day from active month only
-        }
-      })
-      return assertDate
-    }
-
-    // Test
-    cy.contains('nb-card', 'Common Datepicker').find('input').then(input=>{
-      cy.wrap(input).click()
-      const dateToAssert = selectFutureDate(300)
-      cy.wrap(input).should('have.value', dateToAssert)
-    })
+    onDatePickerPage.selectCommonDatepickerDateFromToday(200)
   })
 
   it('Lists and Dropdowns',()=>{

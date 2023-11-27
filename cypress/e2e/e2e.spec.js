@@ -6,7 +6,7 @@ const navigateTo = new NavigationPage()
 
 describe('End-to-End', ()=> {
   beforeEach(() => {
-    cy.visit('/')
+    cy.openHomePage()
   })
 
   it('Submit Inline and Basic Form', () => {

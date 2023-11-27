@@ -6,7 +6,7 @@ const navigateTo = new NavigationPage()
 
 describe('Validate Navigation Menu', ()=>{
   beforeEach(()=>{
-    cy.visit('/')
+    cy.openHomePage()
   })
 
   it('Navigate to pages',()=>{
