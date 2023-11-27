@@ -1,12 +1,15 @@
 /// <reference types="cypress" />
 
+import NavigationPage from "../support/page_objects/navigation";
+const navigateTo = new NavigationPage()
 describe('Interaction with Web Elements', ()=>{
+  beforeEach('Open main page',()=> {
+    cy.visit('/')
+  })
 
   context('Form Layouts page', ()=>{
-    beforeEach('Go to Form Layouts',()=> {
-      cy.visit('/')
-      cy.contains('Forms').click()
-      cy.contains('Form Layouts').click()
+    beforeEach(()=> {
+      navigateTo.formLayoutsPage()
     })
 
     it('Saving and working with subject', ()=>{
@@ -59,10 +62,8 @@ describe('Interaction with Web Elements', ()=>{
 
   context('Toastr page', ()=> {
 
-    beforeEach('Go to Toastr page', () => {
-      cy.visit('/')
-      cy.contains('Modal & Overlays').click()
-      cy.contains('Toastr').click()
+    beforeEach(()=> {
+      navigateTo.toastrPage()
     })
 
     it('Check boxes', () => {
@@ -77,46 +78,36 @@ describe('Interaction with Web Elements', ()=>{
     })
   })
 
-  context('Datepicker page', ()=> {
+  it('Datepicker page', ()=> {
+    navigateTo.datePickerPage()
+    function selectFutureDate(days){
+      let date = new Date()
+      date.setDate(date.getDate() + days)
+      let futureDate = date.getDate()
+      let futureMonth = date.toLocaleDateString('en-US', {month: 'short'})
+      let futureYear = date.getFullYear()
+      let assertDate = `${futureMonth} ${futureDate}, ${futureYear}`
 
-    beforeEach('Go to Datepicker page', () => {
-      cy.visit('/')
-      cy.contains('Forms').click()
-      cy.contains('Datepicker').click()
-    })
-
-    it('Datepicker', () => {
-
-      function selectFutureDate(days){
-        let date = new Date()
-        date.setDate(date.getDate() + days)
-        let futureDate = date.getDate()
-        let futureMonth = date.toLocaleDateString('en-US', {month: 'short'})
-        let futureYear = date.getFullYear()
-        let assertDate = `${futureMonth} ${futureDate}, ${futureYear}`
-
-        cy.get('nb-calendar-navigation').invoke('attr', 'ng-reflect-date').then(dateAttribute => {
-          if(!dateAttribute.includes(futureMonth) || !dateAttribute.includes(futureYear)){
-            cy.get('[data-name="chevron-right"]').click()
-            selectFutureDate(days)
-          }else{
-            cy.get('.day-cell').not('.bounding-month').contains(futureDate).click() //select day from active month only
-          }
-        })
-        return assertDate
-      }
-
-      // Test
-      cy.contains('nb-card', 'Common Datepicker').find('input').then(input=>{
-        cy.wrap(input).click()
-        const dateToAssert = selectFutureDate(300)
-        cy.wrap(input).should('have.value', dateToAssert)
+      cy.get('nb-calendar-navigation').invoke('attr', 'ng-reflect-date').then(dateAttribute => {
+        if(!dateAttribute.includes(futureMonth) || !dateAttribute.includes(futureYear)){
+          cy.get('[data-name="chevron-right"]').click()
+          selectFutureDate(days)
+        }else{
+          cy.get('.day-cell').not('.bounding-month').contains(futureDate).click() //select day from active month only
+        }
       })
+      return assertDate
+    }
+
+    // Test
+    cy.contains('nb-card', 'Common Datepicker').find('input').then(input=>{
+      cy.wrap(input).click()
+      const dateToAssert = selectFutureDate(300)
+      cy.wrap(input).should('have.value', dateToAssert)
     })
   })
 
   it('Lists and Dropdowns',()=>{
-    cy.visit('/')
 
     // #1 Select 1 option in dropdown
     cy.get('nav nb-select').click()
@@ -138,9 +129,7 @@ describe('Interaction with Web Elements', ()=>{
   })
 
   it('Table filtering', ()=>{
-    cy.visit('/')
-    cy.contains('Tables & Data').click()
-    cy.contains('Smart Table').click()
+    navigateTo.smartTablePage()
 
     //Get each row validation
     const age = [20, 30, 40, 200]
@@ -159,9 +148,7 @@ describe('Interaction with Web Elements', ()=>{
   })
 
   it('Dialog Box', ()=> {
-    cy.visit('/')
-    cy.contains('Tables & Data').click()
-    cy.contains('Smart Table').click()
+    navigateTo.smartTablePage()
 
     // #1 - problem:  if window confirm event will not fire, validation will not run.
     // we will not catch that window was not opened. Test will pass always
