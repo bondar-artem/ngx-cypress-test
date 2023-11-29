@@ -106,7 +106,7 @@ describe('First test Suite',()=>{
         })
 
     })
-    it.only('extracting text',()=>{
+    it('extracting text',()=>{
         cy.visit('/')
         cy.contains('Forms').click()
         cy.contains('Form Layouts').click()
@@ -125,14 +125,27 @@ describe('First test Suite',()=>{
         })
         cy.get('[for="exampleInputEmail1"]').invoke('text').as('labelText').should('contain', 'Email address')
         })
-        //4
+        //4 invoke command
         cy.get('[for="exampleInputEmail1"]').invoke('attr','class').then(classValue=>{
             expect(classValue).to.equal('label')
         })
         //5 invoke property
         cy.get('#exampleInputEmail1').type('test@test.com')
-        cy.get('#exampleInputEmail1').invoke('prop', 'value').should('contain', 'test@test.com')
+        cy.get('#exampleInputEmail1').invoke('prop', 'value').should('contain', 'test@test.com').then(property =>{
+            expect(property).to.equal('test@test.com')
+        })
 
     })
+    it.only('checkbox and radio button', ()=> {
+        cy.visit('/')
+        cy.contains('Forms').click()
+        cy.contains('Form Layouts').click()
+        cy.contains('nb-card','Using the Grid').find('[type="radio"]').then (radioButtons => {
+            cy.wrap(radioButtons).eq(0).check({force:true}).should('be.checked')
+
+        })
+
+    })
+    
 
 })
