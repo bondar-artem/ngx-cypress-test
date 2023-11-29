@@ -125,6 +125,13 @@ describe('First test Suite',()=>{
         })
         cy.get('[for="exampleInputEmail1"]').invoke('text').as('labelText').should('contain', 'Email address')
         })
+        //4
+        cy.get('[for="exampleInputEmail1"]').invoke('attr','class').then(classValue=>{
+            expect(classValue).to.equal('label')
+        })
+        //5 invoke property
+        cy.get('#exampleInputEmail1').type('test@test.com')
+        cy.get('#exampleInputEmail1').invoke('prop', 'value').should('contain', 'test@test.com')
 
     })
 
