@@ -89,7 +89,7 @@ describe('First test Suite',()=>{
             .find('nb-checkbox')
             .click()
     })
-    it.only('third test',()=>{
+    it('third test',()=>{
         cy.visit('/')
         cy.contains('Forms').click()
         cy.contains('Form Layouts').click()
@@ -106,4 +106,26 @@ describe('First test Suite',()=>{
         })
 
     })
+    it.only('extracting text',()=>{
+        cy.visit('/')
+        cy.contains('Forms').click()
+        cy.contains('Form Layouts').click()
+        cy.get('nb-card')
+        // example 1
+        cy.get('[for="exampleInputEmail1"]').should('contain', 'Email address')
+        //example 2, saving JQuery object using then and text method
+        cy.get('[for="exampleInputEmail1"]').then( label =>{
+            const textLabel= label.text()
+            expect(textLabel).to.equal('Email address')
+            cy.wrap(textLabel).should('contain','Email address')
+
+        // example # 3, cypress method
+        cy.get('[for="exampleInputEmail1"]').invoke('text').then (text =>{
+            expect(text).to.equal('Email address')
+        })
+        cy.get('[for="exampleInputEmail1"]').invoke('text').as('labelText').should('contain', 'Email address')
+        })
+
+    })
+
 })
