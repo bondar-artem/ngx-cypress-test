@@ -1,7 +1,5 @@
 /// <reference types="cypress" />
 
-
-
 describe('First test suite', () => {
 
     it('first test', () => {
@@ -209,7 +207,7 @@ describe('First test suite', () => {
 
         cy.get('thead')
         cy.get('thead').find('.nb-plus').click()
-        
+
         cy.get('thead').find('tr').eq(2).then(tableRow2 => {
             cy.wrap(tableRow2).find('[placeholder="ID"]').click().type(200)
             cy.wrap(tableRow2).find('.nb-checkmark').click()
@@ -218,11 +216,23 @@ describe('First test suite', () => {
         cy.get('tbody').find('tr').eq(0).then(tableRow0 => {
             cy.wrap(tableRow0).find('.ng-star-inserted').should('contain', '200')
         })
-       
 
-       
+        // get each row validation 
+        const age = [20, 30, 40, 200]
+
+        cy.wrap(age).each(age => {
+            cy.get('thead [placeholder="Age"]').clear().type(age) 
+            cy.wait(500)
+            cy.get('tbody tr').each(tableRow => {
+                if (age == 200) {
+                    cy.wrap(tableRow).should('contain', 'No data found')
+                } else {
+                    cy.wrap(tableRow).find('td').eq(6).should('contain', age)
+                }
+
+            })
+        })
     })
-   
 })
 
 
