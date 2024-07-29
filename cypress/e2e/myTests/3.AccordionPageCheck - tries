@@ -1,0 +1,17 @@
+describe('accordion page check', () => {
+    it('accordion', () => {
+        cy.visit('/')
+        cy.get('.logo').should('have.text', 'ngx-admin')
+
+        cy.get('.sidebar-toggle').click()
+        cy.contains('Layout').click()
+        cy.contains('Accordion').click()
+        cy.url().should("include", "/accordion");
+        cy.contains('Toggle Accordion By Button').should('be.visible')
+        cy.get('[class="appearance-filled size-medium status-primary shape-rectangle transitions"]').contains('Toggle First Item').click()
+
+
+        
+
+    })
+})
