@@ -50,7 +50,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/modal-overlays/popover',
       },
       {
-        title: 'Toastr',
+        title: 'Toaster',
         link: '/pages/modal-overlays/toastr',
       },
       {
